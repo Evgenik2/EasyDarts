@@ -80,11 +80,32 @@
 				align-self: stretch;
 				margin-right: 1vmax;
 			}
+			.keyboard-input {
+				text-align: center;
+				display: flex;
+				flex: 1;
+				margin: 3vmax;
+				background: white;
+				color: #666666;
+				font-size: 6vmax;
+				justify-content: center;
+				align-items: center;
+				border-radius: 20%;
+				border-color: transparent;
+			}
+			.keyboard-input:active, .keyboard-input:focus {
+				border-color: transparent;
+				outline: none;
+			}
 			.keyboard-row {
 				display: flex;
 				flex: 1;
 				flex-direction: row;
 				align-self: stretch;
+				color: #666666;
+				text-align: center;
+				justify-content: center;
+				font-size: 6vmax;
 			}
 			.keyboard-score-row {
 				display: flex;
@@ -131,6 +152,7 @@
 				justify-content: center;
 				align-items: center;
 				border-radius: 20%;
+				border-color: transparent;
 			}
 			.score-ok-key:active {
 				background: #888888;
@@ -674,10 +696,10 @@
 				<div id="keyboard-keys">
 					<div id="keyboard-menu" class="keyboard-menu" v-bind:class="{ 'element-collapsed': !game.menuShown }">
 							<div class="keyboard-row">
-									First player: <input v-model="game.player1" @change="updateAll"/>
+									First player: <input class="score-key keyboard-input" v-model="game.player1" @change="updateAll"/>
 							</div>
 							<div class="keyboard-row">
-									Second player: <input v-model="game.player2" @change="updateAll"/>
+									Second player: <input class="score-key keyboard-input" v-model="game.player2" @change="updateAll"/>
 							</div>
 							<div class="keyboard-row">
 								<div class="score-ok-key" v-on:click="newGame()">New game</div>
