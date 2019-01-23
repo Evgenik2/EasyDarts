@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Easy Darts 2.0</title>
+		<meta 
+			name='viewport' 
+			content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' 
+		/>
+		<style>
+			@media all and (orientation:landscape) {
+				#dartsGame {
+					width: 100%;
+					display: flex;
+					flex: 1;
+					height: 100%;
+					flex-direction: row;
+					align-self: stretch;
+				}
+				.keyboard-stats {
+					display: flex;
+				}
+			}
+			@media all and (orientation:portrait) {
+				#dartsGame {
+					width: 100%;
+					display: flex;
+					flex: 1;
+					height: 100%;
+					flex-direction: column-reverse;
+					align-self: stretch;
+				}
+				.keyboard-stats {
+					display: none;
+				}
+			}
+			html, body {
+				width: 100%;
+				height: 100%;
+				margin: 0;
+				font-family: serif;
+				user-select: none;
+			}
+			#app {
+				width: 100%;
+				display: flex;
+				height: 100%;
+			}
+
+			#scoring {
+				display: flex;
+				flex: 1.3;
+				flex-direction: column;
+				align-self: stretch;
+			}
+			#keyboard {
+				display: flex;
+				flex: 1;
+				flex-direction: column;
+				background: #dddddd;
+				align-self: stretch;
+			}
+			#keyboard-keys {
+				margin: 1vmax;
+				display: flex;
+				flex: 8;
+				flex-direction: row;
+				align-self: stretch;
+			}
+			.keyboard-numbers {
+				display: flex;
+				flex: 2;
+				flex-direction: column;
+				align-self: stretch;
+				margin-right: 1vmax;
+			}
+			.keyboard-menu {
+				display: flex;
+				flex: 1;
+				flex-direction: column;
+				align-self: stretch;
+				margin-right: 1vmax;
+			}
+			.keyboard-row {
+				display: flex;
+				flex: 1;
+				flex-direction: row;
+				align-self: stretch;
+			}
+			.keyboard-score-row {
+				display: flex;
+				flex: 1;
+				flex-direction: row;
+				align-self: stretch;
+				justify-content: center;
+				align-items: center;
+			}
+			.element-hidden {
+				visibility: hidden;
+			}
+			.keyboard-score {
+				display: flex;
+				flex: 1;
+				flex-direction: column;
+				align-self: stretch;
+			}
+			.element-collapsed {
+				display: none;
+			}
+			.regular-key {
+				text-align: center;
+				display: flex;
+				flex: 1;
+				margin: 0.1vmax;
+				background: #449def;
+				color: white;
+				font-size: 6vmax;
+				justify-content: center;
+				align-items: center;
+			}
+			.regular-key:active {
+				background: #888888;
+			}
+			.score-key {
+				text-align: center;
+				display: flex;
+				flex: 1;
+				margin: 0.3vmax;
+				background: white;
+				color: #666666;
+				font-size: 6vmax;
+				justify-content: center;
+				align-items: center;
+				border-radius: 20%;
+			}
+			.score-ok-key:active {
+				background: #888888;
+			}
+			.score-ok-key {
+				text-align: center;
+				display: flex;
+				flex: 1;
+				margin: 0.3vmax;
+				background: #449def;
+				color: white;
+				font-size: 6vmax;
+				justify-content: center;
+				align-items: center;
+				border-radius: 20%;
+			}
+			.score-double-key {
+				text-align: center;
+				display: flex;
+				margin: 0.5vmax;
+				background: white;
+				color: white;
+				justify-content: center;
+				align-items: center;
+				border-radius: 100%;
+				border-style: solid;
+				border-width: 1vmax;
+				border-color: #888888;
+				width: 3vmax;
+				height: 3vmax;
+			}
+			.score-double-key-checked {
+				border-color: #449def;
+			}
+			.score-double-key-disabled {
+				border-color: #aaaaaa;
+			}
+			.score-x-key {
+				text-align: center;
+				display: flex;
+				margin: 0.5vmax;
+				background: #888888;
+				color: white;
+				font-size: 2vmax;
+				justify-content: center;
+				align-items: center;
+				border: 1vmax solid #888888;
+				border-radius: 100%;
+				width: 3vmax;
+				height: 3vmax;
+			}
+			.score-x-key-checked {
+				border-color: #449def;
+				background: #449def;
+			}
+			.score-x-key-disabled {
+				border-color: #aaaaaa;
+				background: #aaaaaa;
+			}
+			.scoring-data {
+				margin: 1vmax;
+				display: flex;
+				flex: 1;
+				flex-direction: column;
+			}
+			#scoring-throws {
+				overflow-y: auto;
+			}
+			#scoring-throws::-webkit-scrollbar {
+				display: none;
+			}
+			#game-component {
+				display: flex;
+				flex: 8;
+				flex-direction: row;
+				justify-content: flex-start;
+			}
+			.scoring-head {
+				display: flex;
+				flex-direction: row;
+				margin-bottom: 0.3vmax;
+			}
+			.scoring-row {
+				display: flex;
+				flex-direction: row;
+				margin-bottom: 0.3vmax;
+			}
+			.scoring-player {
+				display: flex;
+				flex: 2;
+				background: #888888;
+				color: white;
+				font-size: 2vmax;
+				justify-content: center;
+				align-items: center;
+			}
+			.scoring-leg {
+				display: flex;
+				flex: 1;
+				background: #888888;
+				color: white;
+				font-size: 2vmax;
+				justify-content: center;
+				align-items: center;
+			}
+			.scoring-throw {
+				display: flex;
+				flex: 1;
+				background: #dddddd;
+				color: #666666;
+				font-size: 2vmax;
+				justify-content: center;
+				align-items: center;
+			}
+
+			.scoring-throw-number {
+				margin-left: 0.3vmax;
+				margin-right: 0.3vmax;
+				background: #b8b8b8;
+			}
+			.scoring-throw-first {
+				margin-right: 0.3vmax;
+			}
+			.scoring-throw-first-left {
+			}
+			.scoring-throw-second {
+				margin-left: 0.3vmax;
+			}
+			.scoring-throw-second-left {
+			}
+			.scoring-throw-red {
+				color: red;
+			}
+			.scoring-throw-next {
+				background: #ffa8a8
+			}
+			.keyboard-stats {
+				flex: 1.3;
+				flex-direction: row;
+				margin: 0.3vmax;
+				font-size: 1.5vmax;
+			}
+			.keyboard-stats-list {
+				display: flex;
+				flex: 1;
+				flex-direction: row;
+				margin: 0.3vmax;
+			}
+			.stat-item {
+				display: flex;
+				flex-direction: column;
+				flex: 1;
+				margin-left: 0.1vmax;
+				margin-bottom: 0.1vmax;
+			}
+			.stat-head {
+				flex: 1;
+				display: flex;
+				background: #449def;
+				color: white;
+				justify-content: center;
+				align-items: center;
+				margin-left: 0.1vmax;
+				margin-bottom: 0.2vmax;
+			}
+			.stat-value {
+				flex: 1;
+				display: flex;
+				background: white;
+				justify-content: center;
+				align-items: center;
+				color: #666666;
+				margin-left: 0.1vmax;
+				margin-bottom: 0.2vmax;
+			}
+			.stat-game-way {
+				flex: 1;
+				display: flex;
+				background: #dddddd;
+				justify-content: center;
+				align-items: center;
+				color: #666666;
+				margin-left: 0.1vmax;
+				margin-bottom: 0.2vmax;
+			}
+			.game-way-stats {
+				display: flex;
+				flex: 1;
+				flex-direction: row;
+				margin: 0.1vmax;
+			}
+			.stat-game-way-item {
+				display: flex;
+				flex-direction: column;
+				flex: 1;
+				margin-left: 0.1vmax;
+				margin-bottom: 0.1vmax;
+			}
+			.stat-game-way-player {
+				display: flex;
+				flex-direction: column;
+				flex: 6;
+				margin-left: 0.1vmax;
+				margin-bottom: 0.1vmax;
+			}
+			.stat-game-way-head {
+				flex: 1;
+				display: flex;
+				background: #449def;
+				color: white;
+				justify-content: center;
+				align-items: center;
+				margin-left: 0.1vmax;
+				margin-bottom: 0.2vmax;
+			}
+		</style>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.5.22/dist/vue.js"></script>
+		<script>
+			var swipe = function(el, settings) {
+				var settings = Object.assign({}, {
+				minDist: 60,
+				maxDist: 120,
+				maxTime: 700,
+				minTime: 50
+			}, settings);
+						// коррекция времени при ошибочных значениях
+			if (settings.maxTime < settings.minTime) settings.maxTime = settings.minTime + 500;
+			if (settings.maxTime < 100 || settings.minTime < 50) {
+				settings.maxTime = 700;
+				settings.minTime = 50;
+			}
+
+			var el = this.el,       // отслеживаемый элемент
+				dir,                  // направление свайпа (horizontal, vertical)
+				swipeType,            // тип свайпа (up, down, left, right)
+				dist,                 // дистанция, пройденная указателем
+				isMouse = false,      // поддержка мыши (не используется для тач-событий)
+				isMouseDown = false,  // указание на активное нажатие мыши (не используется для тач-событий)
+				startX = 0,           // начало координат по оси X (pageX)
+				distX = 0,            // дистанция, пройденная указателем по оси X
+				startY = 0,           // начало координат по оси Y (pageY)
+				distY = 0,            // дистанция, пройденная указателем по оси Y
+				startTime = 0,        // время начала касания
+				support = {           // поддерживаемые браузером типы событий
+				pointer: !!("PointerEvent" in window || ("msPointerEnabled" in window.navigator)),
+				touch: !!(typeof window.orientation !== "undefined" || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || "ontouchstart" in window || navigator.msMaxTouchPoints || "maxTouchPoints" in window.navigator > 1 || "msMaxTouchPoints" in window.navigator > 1)
+				};
+
+			/**
+			 * Опредление доступных в браузере событий: pointer, touch и mouse.
+			 * @returns {Object} - возвращает объект с доступными событиями.
+			 */
+			var getSupportedEvents = function() {
+				switch (true) {
+				case support.pointer:
+					events = {
+					type:   "pointer",
+					start:  "PointerDown",
+					move:   "PointerMove",
+					end:    "PointerUp",
+					cancel: "PointerCancel",
+					leave:  "PointerLeave"
+					};
+					// добавление префиксов для IE10
+					var ie10 = (window.navigator.msPointerEnabled && Function('/*@cc_on return document.documentMode===10@*/')());
+					for (var value in events) {
+					if (value === "type") continue;
+					events[value] = (ie10) ? "MS" + events[value] : events[value].toLowerCase();
+					}
+					break;
+				case support.touch:
+					events = {
+					type:   "touch",
+					start:  "touchstart",
+					move:   "touchmove",
+					end:    "touchend",
+					cancel: "touchcancel"
+					};
+					break;
+				default:
+					events = {
+					type:  "mouse",
+					start: "mousedown",
+					move:  "mousemove",
+					end:   "mouseup",
+					leave: "mouseleave"
+					};
+					break;
+				}
+				return events;
+			};
+
+
+			/**
+			 * Объединение событий mouse/pointer и touch.
+			 * @param e {Event} - принимает в качестве аргумента событие.
+			 * @returns {TouchList|Event} - возвращает либо TouchList, либо оставляет событие без изменения.
+			 */
+			var eventsUnify = function(e) {
+				return e.changedTouches ? e.changedTouches[0] : e;
+			};
+
+
+			/**
+			 * Обрабочик начала касания указателем.
+			 * @param e {Event} - получает событие.
+			 */
+			var checkStart = function(e) {
+				var event = eventsUnify(e);
+				if (support.touch && typeof e.touches !== "undefined" && e.touches.length !== 1) return; // игнорирование касания несколькими пальцами
+				dir = "none";
+				swipeType = "none";
+				dist = 0;
+				startX = event.pageX;
+				startY = event.pageY;
+				startTime = new Date().getTime();
+				if (isMouse) isMouseDown = true; // поддержка мыши
+				e.preventDefault();
+			};
+
+			/**
+			 * Обработчик движения указателя.
+			 * @param e {Event} - получает событие.
+			 */
+			var checkMove = function(e) {
+				if (isMouse && !isMouseDown) return; // выход из функции, если мышь перестала быть активна во время движения
+				var event = eventsUnify(e);
+				distX = event.pageX - startX;
+				distY = event.pageY - startY;
+				if (Math.abs(distX) > Math.abs(distY)) dir = (distX < 0) ? "left" : "right";
+				else dir = (distY < 0) ? "up" : "down";
+				e.preventDefault();
+			};
+
+			/**
+			 * Обработчик окончания касания указателем.
+			 * @param e {Event} - получает событие.
+			 */
+			var checkEnd = function(e) {
+				if (isMouse && !isMouseDown) { // выход из функции и сброс проверки нажатия мыши
+				mouseDown = false;
+				return;
+				}
+				var endTime = new Date().getTime();
+				var time = endTime - startTime;
+				if (time >= settings.minTime && time <= settings.maxTime) { // проверка времени жеста
+				if (Math.abs(distX) >= settings.minDist && Math.abs(distY) <= settings.maxDist) {
+					swipeType = dir; // опредление типа свайпа как "left" или "right"
+				} else if (Math.abs(distY) >= settings.minDist && Math.abs(distX) <= settings.maxDist) {
+					swipeType = dir; // опредление типа свайпа как "top" или "down"
+				}
+				}
+				dist = (dir === "left" || dir === "right") ? Math.abs(distX) : Math.abs(distY); // опредление пройденной указателем дистанции
+
+				// генерация кастомного события swipe
+				if (swipeType !== "none" && dist >= settings.minDist) {
+				var swipeEvent = new CustomEvent("swipe", {
+					bubbles: true,
+					cancelable: true,
+					detail: {
+						full: e, // полное событие Event
+						dir:  swipeType, // направление свайпа
+						dist: dist, // дистанция свайпа
+						time: time // время, потраченное на свайп
+					}
+					});
+				el.dispatchEvent(swipeEvent);
+				}
+				e.preventDefault();
+			};
+
+			// добавление поддерживаемых событий
+			var events = getSupportedEvents();
+
+			// проверка наличия мыши
+			if ((support.pointer && !support.touch) || events.type === "mouse") isMouse = true;
+
+			// добавление обработчиков на элемент
+			el.addEventListener(events.start, checkStart);
+			el.addEventListener(events.move, checkMove);
+			el.addEventListener(events.end, checkEnd);
+
+			};
+		</script>
+		<script>
+			var minDartClose= [ 99,99,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,3,2,2,2,3,2,2,3,3,2,3,3,2,3,3,2,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,99,3,3,99,99,3,99,99,3,99,99,3 ];
+			var bristowCalc = [ "", "", "D1", "1 D1", "D2", "1 D2", "D3", "3 D2", "D4", "1 D4", "D5", "3 D4", "D6", "5 D4", "D7", "7 D4", "D8", "1 D8", "D9", "3 D8", "D10", "5 D8", "D11", "7 D8", "D12", "9 D8", "D13", "11 D8", "D14", "13 D8", "D15", "15 D8", "D16", "1 D16", "D17", "3 D16", "D18", "5 D16", "D19", "7 D16", "D20", "9 D16", "10 D16", "11 D16", "12 D16", "13 D16", "14 D16", "15 D16", "16 D16", "17 D16", "18 D16", "19 D16", "20 D16", "13 D20", "14 D20", "15 D20", "16 D20", "17 D20", "18 D20", "19 D20", "20 D20", "T15 D8", "T10 D16", "T17 D6", "T16 D8", "25 D20", "50 D8", "T17 D8", "T20 D4", "T11 D18", "T18 D8", "T13 D16", "T20 D6", "T19 D8", "T14 D16", "T17 D12", "T20 D8", "T15 D16", "T18 D12", "T19 D11", "T16 D16", "T15 D18", "50 D16", "T17 D16", "T20 D12", "T19 D14", "T18 D16", "T17 D18", "T20 D14", "T19 D16", "T20 D15", "T17 D20", "T20 D16", "T19 D18", "T18 D20", "T20 3 D16", "T20 D18", "T19 D20", "T18 12 D16", "T19 10 D16", "T20 D20", "T19 12 D16", "T20 10 D16", "T20 11 D16", "T20 12 D16", "T19 16 D16", "T20 14 D16", "T20 15 D16", "T20 16 D16", "T20 17 D16", "T18 16 D20", "T19 14 D20", "T20 20 D16", "T19 16 D20", "T20 14 D20", "T19 20 D18", "T20 20 D18", "T20 T17 D20", "T20 T18 D20", "T19 T13 D12", "T20 20 D20", "T17 T18 D8", "T18 18 50", "19 16 50", "T20 14 50", "50 25 50", "T19 T19 D6", "T20 T17 D8", "T18 T18 D10", "T19 T20 D6", "T20 20 50", "T20 T13 D16", "25 T19 50", "T19 T20 D8", "T20 T14 D16", "25 T20 50", "T20 T20 D8", "T20 T15 D16", "T20 T18 D12", "T20 T19 D11", "T20 T20 D10", "T20 T19 D12", "T20 50 D16", "T20 T17 D16", "T20 T20 D12", "T20 T19 D14", "T20 T18 D16", "T20 T17 D18", "T20 T20 D14", "T20 T19 D16", "T20 T20 D15", "T20 T17 D20", "T20 T20 D16", "T20 T19 D18", "T20 T18 D20", "T20 T19 D19", "T20 T20 D18", "T20 T19 D20", "T20 T20 D19", "", "T20 T20 D20", "T20 T17 50", "", "", "T20 T18 50", "", "", "T20 T19 50", "", "", "T20 T20 50" ];
+		</script>
+		<script>
+		    var indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB,
+        		IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction || window.msIDBTransaction,
+				baseName = "easydarts1";
+			function logerr(err){
+            	console.log(err);
+			}
+			function connectDB(tableName, f){
+				var request = indexedDB.open(baseName);
+				request.onerror = logerr;
+				request.onsuccess = function(){
+					f(request.result);
+				}
+			}
+			function CreateObjectStore(storeName, f) {
+				var request = indexedDB.open(baseName);
+				request.onsuccess = function (e){
+					var database = e.target.result;
+					var version =  parseInt(database.version);
+					database.close();
+					var secondRequest = indexedDB.open(baseName, version + 1);
+					secondRequest.onerror = function() {};
+					secondRequest.onupgradeneeded = function (e) {
+						var database = e.target.result;
+						if(!database.objectStoreNames.contains(storeName)) {
+							var objectStore = database.createObjectStore(storeName, {
+								keyPath: "key"
+							});
+						}
+					};
+					secondRequest.onsuccess = function (e) {
+						e.target.result.close();
+						f();
+					}
+				}
+			}
+			function getLastRecord(tableName, f){
+				connectDB(tableName, function(db){
+					var request = db.transaction([tableName], "readonly").objectStore(tableName).openCursor(null, 'prev');
+					request.onerror = function() {
+						logerr;
+						f();
+					}
+					request.onsuccess = function(e) {
+						var cursor = e.target.result;
+						if(cursor) {
+							f(cursor.value.data);
+						}
+						else {
+							f();
+						}
+					}
+				});
+			}
+			function setRecords(tableName, key, data) {
+				connectDB(tableName, function(db) {
+                    var request = db.transaction([tableName], "readwrite").objectStore(tableName).put({ key: key, data: data });
+                    request.onerror = logerr;
+                    request.onsuccess = function(){
+                    }
+                });
+			}
+			function deleteRecord(tableName, key) {
+				connectDB(tableName, function(db) {
+                    var request = db.transaction([tableName], "readwrite").objectStore(tableName).openCursor(IDBKeyRange.only(key))
+                    request.onerror = logerr;
+                    request.onsuccess = function(){
+						var cursor = request.result;
+						if (cursor) {
+							cursor.delete();
+							cursor.continue();
+						}	
+                    }
+                });
+			}
+			function deleteAll(tableName) {
+				connectDB(tableName, function(db) {
+                    var request = db.transaction([tableName], "readwrite").objectStore(tableName).openCursor();
+                    request.onerror = logerr;
+                    request.onsuccess = function(){
+						var cursor = request.result;
+						if (cursor) {
+							cursor.delete();
+							cursor.continue();
+						}	
+                    }
+                });
+			}
+		</script>
+		<script>
+			Vue.component("stats-component", {
+				template: `
+					<div class="stat-item"> 
+						<div class="stat-head">{{item.name}}</div>
+						<div class="stat-value">{{item.player1}}</div>
+						<div class="stat-value">{{item.player2}}</div>
+					</div>
+				`,
+				props: {
+					item: Object
+				}
+			});
+			Vue.component("game-way-component", {
+				template: `
+					<div class="stat-game-way-item"> 
+						<div class="stat-game-way-head">{{item.name}}</div>
+						<div class="stat-game-way">{{item.player1}}</div>
+						<div class="stat-game-way">{{item.player2}}</div>
+					</div>
+				`,
+				props: {
+					item: Object
+				}
+			});
+			Vue.component("game-leg-component", {
+				template: `
+					<div class="scoring-row">
+						<div class="scoring-throw scoring-throw-first" v-bind:class="{ 'scoring-throw-red': item.throw1 % 1000 >= 100, 'scoring-throw-next': item.next == 1 }">{{item.throw1 === "" ? "" : (item.throw1 >= 10000 ? "X" + Math.floor(item.throw1 / 10000) : item.throw1 % 1000) + "*".repeat(Math.floor(item.throw1 % 10000 / 1000))}}</div>
+						<div class="scoring-throw scoring-throw-first-left">{{item.left1}}</div>
+						<div class="scoring-throw scoring-throw-number">{{item.throw}}</div>
+						<div class="scoring-throw scoring-throw-second-left">{{item.left2}}</div>
+						<div class="scoring-throw scoring-throw-second" v-bind:class="{ 'scoring-throw-red': item.throw2 % 1000 >= 100, 'scoring-throw-next': item.next == 2 }">{{item.throw2 === "" ? "" : (item.throw2 >= 10000 ? "X" + Math.floor(item.throw2 / 10000) : item.throw2 % 1000) + "*".repeat(Math.floor(item.throw2 % 10000 / 1000))}}</div>
+					</div>
+				`,
+				props: {
+					item: Object
+				}
+			});
+			Vue.component("game-set-component", {
+				template: `
+					<div class="scoring-data">
+						<div class="scoring-head">
+							<div class="scoring-player">{{item.player1}}</div>
+							<div class="scoring-leg">Leg {{item.leg}}</div>
+							<div class="scoring-player">{{item.player2}}</div>
+						</div>
+						<div id="scoring-throws">
+							<game-leg-component is="game-leg-component" v-for="item in item.throws" v-bind:item="item" v-bind:key="item.name">
+							</game-leg-component>
+						</div>
+					</div>
+				`,
+				props: {
+					item: Object
+				}
+			});
+		</script>
+	</head>
+	<body>
+		<div id="app">
+		  <div id="dartsGame">
+			<div id="keyboard">
+				<div id="keyboard-keys">
+					<div id="keyboard-menu" class="keyboard-menu" v-bind:class="{ 'element-collapsed': !game.menuShown }">
+							<div class="keyboard-row">
+									First player: <input v-model="game.player1" @change="updateAll"/>
+							</div>
+							<div class="keyboard-row">
+									Second player: <input v-model="game.player2" @change="updateAll"/>
+							</div>
+							<div class="keyboard-row">
+								<div class="score-ok-key" v-on:click="newGame()">New game</div>
+							</div>
+							<div class="keyboard-row">
+									<div class="score-ok-key" v-on:click="game.menuShown = false">Continue</div>
+							</div>
+
+					</div>
+					<div id="keyboard-numbers" class="keyboard-numbers" v-bind:class="{ 'element-collapsed': game.menuShown }">
+						<div class="keyboard-row">
+							<div class="regular-key" id="key1" v-on:click="keyboardClick(1)"> 1 </div>
+							<div class="regular-key" id="key2" v-on:click="keyboardClick(2)"> 2 </div>
+							<div class="regular-key" id="key3" v-on:click="keyboardClick(3)"> 3 </div>
+						</div>
+						<div class="keyboard-row">
+							<div class="regular-key" id="key4" v-on:click="keyboardClick(4)"> 4 </div>
+							<div class="regular-key" id="key5" v-on:click="keyboardClick(5)"> 5 </div>
+							<div class="regular-key" id="key6" v-on:click="keyboardClick(6)"> 6 </div>
+						</div>
+						<div class="keyboard-row">
+							<div class="regular-key" id="key7" v-on:click="keyboardClick(7)"> 7 </div>
+							<div class="regular-key" id="key8" v-on:click="keyboardClick(8)"> 8 </div>
+							<div class="regular-key" id="key9" v-on:click="keyboardClick(9)"> 9 </div>
+						</div>
+						<div class="keyboard-row">
+							<div class="regular-key" id="keyC" v-on:click="game.menuShown = true"> M </div>
+							<div class="regular-key" id="key0" v-on:click="keyboardClick(0)"> 0 </div>
+							<div class="regular-key" id="keyD" v-on:click="keyboardDelete"> &#11013 </div>
+						</div>
+					</div>
+					<div id="keyboard-score" class="keyboard-score" v-bind:class="{ 'element-collapsed': game.menuShown }">
+						<div class="keyboard-row">
+							<div class="score-key" id="keyScore">{{value}}</div>
+						</div>
+						<div class="keyboard-row">
+							<div class="score-ok-key" id="keyOk" v-on:click="keyboardOk">Ok</div>
+						</div>
+						<div class="keyboard-score-row" v-bind:class="{ 'element-hidden': disabledCloses >= 3 }">
+							<div class="score-double-key" v-bind:class="{ 'score-double-key-checked': doubles >= 1, 'score-double-key-disabled': disabledDoubles >= 3 }" v-on:click="doubles = disabledDoubles >= 3 ? doubles : (doubles >= 1 ? 0 : 1)"> </div>
+							<div class="score-double-key" v-bind:class="{ 'score-double-key-checked': doubles >= 2, 'score-double-key-disabled': disabledDoubles >= 2 }" v-on:click="doubles = disabledDoubles >= 2 ? doubles : 2"> </div>
+							<div class="score-double-key" v-bind:class="{ 'score-double-key-checked': doubles >= 3, 'score-double-key-disabled': disabledDoubles >= 1 }" v-on:click="doubles = disabledDoubles >= 1 ? doubles : 3"> </div>
+						</div>
+						<div class="keyboard-score-row" v-bind:class="{ 'element-hidden': disabledCloses >= 3 }">
+							<div class="score-x-key" v-bind:class="{ 'score-x-key-checked': closes >= 1, 'score-x-key-disabled': disabledCloses >= 1 }" v-on:click="keyboardClose(1)">X1</div>
+							<div class="score-x-key" v-bind:class="{ 'score-x-key-checked': closes >= 2, 'score-x-key-disabled': disabledCloses >= 2 }" v-on:click="keyboardClose(2)">X2</div>
+							<div class="score-x-key" v-bind:class="{ 'score-x-key-checked': closes >= 3, 'score-x-key-disabled': disabledCloses >= 3 }" v-on:click="keyboardClose(3)">X3</div>
+						</div>
+					</div>
+				</div>
+				<div class="keyboard-stats">
+					<div id="stats-list" class="keyboard-stats-list">
+						<stats-component is="stats-component" v-for="item in stats" v-bind:item="item" v-bind:key="item.name">
+						</stats-component>
+					</div>
+				</div>
+			</div>
+			<div id="scoring">
+				<div id="game-component">
+						<div class="scoring-data">
+							<div class="scoring-head">
+								<div class="scoring-player" v-on:click="prev">{{legs[legN].player1}}</div>
+								<div class="scoring-leg">Leg {{legs[legN].leg + 1}}</div>
+								<div class="scoring-player" v-on:click="next">{{legs[legN].player2}}</div>
+							</div>
+							<div id="scoring-throws">
+								<game-leg-component is="game-leg-component" v-for="item in legs[legN].throws" v-bind:item="item" v-bind:key="item.name">
+								</game-leg-component>
+							</div>
+						</div>
+				</div>
+				<div class="keyboard-stats">
+					<div id="scoring-stats" class="keyboard-stats-list">
+						<div class="stat-game-way-player"> 
+								<div class="stat-game-way-head">{{game.name}}</div>
+								<div class="stat-game-way">{{game.player1}}</div>
+								<div class="stat-game-way">{{game.player2}}</div>
+						</div>
+						<game-way-component is="game-way-component" v-for="item in stats" v-bind:item="item" v-bind:key="item.name">
+						</game-way-component>
+					</div>
+				</div>
+			</div>
+		  </div>
+		</div>
+		<script defer>
+			var gameComponent;
+			var statsList;
+			var keyboardKeys;
+			var game = {
+					menuShown: true,
+					player1: 'player 1',
+					player2: 'Player 2',
+					setLength: 1,
+					legLength: 3,
+					gameLength: 501,
+					noStartSwap: false,
+					step: 0,
+					game: [ 
+						[//set
+							{//leg
+								firstThrows: [],
+								secondThrows: []
+							}
+						] 
+					],
+					stats: [],
+					lastLeg : [],
+					storeCurrentState: function () {
+						setRecords("CurrentGame", this.step, JSON.stringify(this));
+					},
+					restoreLastState: function () {
+						getLastRecord("CurrentGame", function(v) {
+							if(v == undefined) {
+								game.game = [ 
+									[//set
+										{//leg
+											firstThrows: [],
+											secondThrows: []
+										}
+									]
+								];
+								game.updateAll();
+								return;
+							}
+							var g = JSON.parse(v);
+							game.menuShown = g.menuShown;
+							game.player1 = g.player1;
+							game.player2 = g.player2;
+							game.setLength = g.setLength;
+							game.legLength = g.legLength;
+							game.gameLength = g.gameLength;
+							game.noStartSwap = g.noStartSwap;
+							game.step = g.step;
+							game.game = g.game;
+							game.updateAll();
+						});
+					},
+					undo: function() {
+						if(this.step == 0) return;
+						deleteRecord("CurrentGame", this.step);
+						this.restoreLastState();
+					},
+					updateStats: function() {
+						this.stats = [
+							{ name: "100+", player1: 0, player2: 0 },
+							{ name: "140+", player1: 0, player2: 0 },
+							{ name: "180", player1: 0, player2: 0 },
+							{ name: "Av", player1: 0, player2: 0 },
+							{ name: "HC", player1: 0, player2: 0 },
+							{ name: "Dbls", player1: "0/0", player2: "0/0" },
+							{ name: "%", player1: 0, player2: 0 },
+							{ name: "Best", player1: 0, player2: 0 },
+							{ name: "LWAT", player1: 0, player2: 0 },
+						];
+						var fThrow = 0, fTotal = 0, fDbl = 0, fCl = 0, fBst = 0, fLwat = 0;
+						for(var i = 0; i < this.game.length; i++)
+							for(var j = 0; j < this.game[i].length; j++) {
+								var l = this.game[i][j];
+								l.firstThrows.forEach((v) => {
+									if(v == 180) this.stats[2].player1+=1;
+									else if(v >= 140) this.stats[1].player1+=1;
+									else if(v >= 100) this.stats[0].player1+=1;
+									fThrow += 1;
+									fTotal += v;
+									if(v > 10000) {
+										this.stats[4].player1 = Math.max(this.stats[0].player1, v % 1000);
+										fBst = Math.max(fBst, v % 1000);
+									}
+									if(v > 1000)
+										fDbl += Math.floor(v % 10000 / 1000);
+									if(v > 10000) {
+										fCl += 1;
+										if(!this.isFirstStart(i, j))
+											fLwat += 1;
+									}
+
+								});
+								this.stats[3].player1 = fThrow > 0 ? Math.round(fTotal / fThrow) : 0;
+								this.stats[5].player1 = fCl + "/" + Math.round(fDbl);
+								this.stats[6].player1 = fDbl > 0 ? Math.round(fCl / fDbl * 100) : 0;
+								this.stats[7].player1 = fBst;
+								this.stats[8].player1 = fLwat;
+							}
+						var sThrow = 0, sTotal = 0, sDbl = 0, sCl = 0, sBst = 0, sLwat = 0;
+						for(var i = 0; i < this.game.length; i++)
+							for(var j = 0; j < this.game[i].length; j++) {
+								var l = this.game[i][j];
+								l.secondThrows.forEach((v) => {
+									if(v == 180) this.stats[2].player2+=1;
+									else if(v >= 140) this.stats[1].player2+=1;
+									else if(v >= 100) this.stats[0].player2+=1;
+									sThrow += 1;
+									sTotal += v;
+									if(v > 10000) {
+										this.stats[4].player2 = Math.max(this.stats[0].player2, v % 1000);
+										sBst = Math.max(sBst, v % 1000);
+									}
+									if(v > 1000)
+										sDbl += Math.floor(v % 10000 / 1000);
+									if(v > 10000) {
+										sCl += 1;
+										if(this.isFirstStart(i, j))
+											sLwat += 1;
+									}
+								});
+								this.stats[3].player2 = sThrow > 0 ? Math.round(sTotal / sThrow) : 0;
+								this.stats[5].player2 = sCl + "/" + Math.round(sDbl);
+								this.stats[6].player2 = sDbl > 0 ? Math.round(sCl / sDbl * 100) : 0;
+								this.stats[7].player2 = sBst;
+								this.stats[8].player2 = sLwat;
+							}
+						statsList.stats = this.stats;
+					},
+					updateAll: function() {
+						game.lastLeg = game.getVisualLeg(game.game.length - 1, game.game[game.game.length - 1].length - 1);
+						game.updateStats();
+						var res = [];
+						for(var i = 0; i < game.game.length; i++)
+							for(var j = 0; j <  game.game[i].length; j++) {
+								res.push(game.getVisualLeg(i, j));
+							}
+						gameComponent.legN = res.length - 1;
+						gameComponent.legs = res;
+						keyboardKeys.game = game;
+						keyboardKeys.doubles = Math.max(keyboardKeys.doubles, game.minimumDoubles());
+						keyboardKeys.minimumDoubles = game.minimumDoubles();
+						keyboardKeys.disabledCloses = game.disabledCloses();
+						keyboardKeys.disabledDoubles = game.disabledDoubles();
+						gameComponent.legN = gameComponent.legs.length - 1;
+						keyboardKeys.scrollToView();
+					},
+					nextThrow: function(value) {
+						if(this.lastLeg.next == 0) return;
+						var t = this.lastLeg.throws;
+						var s = this.game[this.game.length - 1];
+						if(t[t.length-1].next == 1)
+							s[s.length - 1].firstThrows.push(value);
+						else
+							s[s.length - 1].secondThrows.push(value);
+						this.step++;
+					},
+					newLeg: function() {
+						if(this.lastLeg.next != 0) return;
+						if(this.game[this.game.length - 1].length >= this.legLength) {
+							if(this.game.length >= this.setLength) return;
+							this.game.push([]);
+						}
+						this.game[this.game.length - 1].push({ firstThrows: [], secondThrows: [] });
+					},
+					actualLeft: function() {
+						if(this.lastLeg.next == 0) return 0;
+						if(this.lastLeg.next == 1)
+							return this.lastLeg.left1;
+						return this.lastLeg.left2;
+					},
+					validateNumber: function(value) {
+						if(this.lastLeg.next == 0) return false;
+						return value <= this.actualLeft();
+					},
+					minimumDoubles: function() {
+						if(this.lastLeg.next == 0) return 0;
+						return this.availableCloses() == 1 ? 1 : 0;
+					},
+					disabledCloses: function() {
+						return this.availableCloses() - 1;
+					},
+					disabledDoubles: function() {
+						return this.disabledCloses();
+					},
+					availableCloses: function() {
+						if(this.lastLeg.next == 0) return 99;
+						var left = this.actualLeft();
+						if(minDartClose[left] != undefined)
+							return minDartClose[left];
+						return 99;
+					},
+					isFirstStart: function(setN, legN) {
+						if(this.noStartSwap)
+							return true;
+						return setN % 2 == 0 ? legN % 2 == 0 : legN % 2 != 0;
+					},
+					getVisualLeg: function(setN, legN) {
+						var legRes = {
+								player1: game.player1,
+								player2: game.player2,
+								set: setN,
+								leg: legN,
+								left1: game.gameLength,
+								left2: game.gameLength,
+								throw: 0,
+								startsFirst: true,
+								next: 0,
+								throws: [
+									{
+										throw1: "",
+										left1: game.gameLength, 
+										throw2: "",
+										left2: game.gameLength,
+										throw: 0
+									}
+								]
+							};
+						var set = game.game[legRes.set], leg = set[legRes.leg], isFirstPlayer = true;
+						for(i = 0; i < Math.max(leg.firstThrows.length, leg.secondThrows.length); i++) {
+							legRes.throws.push({
+								throw1: i < leg.firstThrows.length ? leg.firstThrows[i] : "",
+								left1: "", 
+								throw2: i < leg.secondThrows.length ? leg.secondThrows[i] : "",
+								left2: "",
+								throw: (i + 1) * 3	
+							});
+						}
+						for(i = 0; i < leg.firstThrows.length; i++) {
+							legRes.left1 -= leg.firstThrows[i] % 1000;
+							legRes.throws[i + 1].left1 = legRes.left1 == 0 ? "" : legRes.left1;
+						}
+						for(i = 0; i < leg.secondThrows.length; i++) {
+							legRes.left2 -= leg.secondThrows[i] % 1000;
+							legRes.throws[i + 1].left2 = legRes.left2 == 0 ? "" : legRes.left2;
+						}
+						if(legRes.left1 > 0 && legRes.left2 > 0)
+							if(leg.firstThrows.length == leg.secondThrows.length) {
+								legRes.throws.push({
+									throw1: "",
+									left1: "", 
+									throw2: "",
+									left2: "",
+									throw: (legRes.throws.length) * 3,
+									next: this.isFirstStart(setN, legN) ? 1 : 2
+								});
+								legRes.next = this.isFirstStart(setN, legN) ? 1 : 2;
+							} else {
+								if(this.isFirstStart(setN, legN) && leg.firstThrows.length > leg.secondThrows.length) {
+									legRes.next = 2;
+									legRes.throws[legRes.throws.length-1].next = 2;
+								} else {
+									legRes.next = 1;
+									legRes.throws[legRes.throws.length-1].next = 1;
+								}
+							}
+						return legRes;
+					}
+				};
+			gameComponent = new Vue({
+				el: "#game-component",
+				data: {
+					legN: 1,
+					legs: []
+				},
+				methods: {
+					prev: function() {
+						this.legN--;
+						if(this.legN < 0)
+							this.legN = 0;
+					},
+					next: function() {
+						this.legN++;
+						if(this.legN >= this.legs.length)
+						this.legN = this.legs.length - 1;
+					}
+				}
+			});
+			statsList = new Vue({
+				el: "#stats-list",
+				data: {
+					stats: game.stats
+				}
+			});
+			new Vue({
+				el: "#scoring-stats",
+				data: {
+					game: { name: "Best of 1 sets of 5 legs", player1: "Player 1", player2: "Player 2" },
+					stats: [
+						{ name: "Sets", player1: "0", player2: "0", width: 1 },
+						{ name: "Legs", player1: "0", player2: "0", width: 1 },
+					]
+				}
+			});
+			keyboardKeys = new Vue({
+				el: "#keyboard-keys",
+				data: {
+					game: game,
+					value: 0,
+					doubles: 0,
+					closes: 0,
+					disabledDoubles: 0,
+					disabledCloses: 0,
+					minimumDoubles: 0
+				},
+				watch: {
+					'game.player1': function(val, preVal){
+						game.updateAll();
+					},
+					'game.player2': function(val, preVal){
+						game.updateAll();
+					}
+				},
+				methods: {
+					updateAll: function() {
+						game.updateAll();
+					},
+					keyboardClick: function (value) {
+						var v = this.value * 10 + value;
+						if(v > 180)
+							v = 0;
+						if(!game.validateNumber(v))
+							v = 0;
+						this.value = v;
+						gameComponent.legN = gameComponent.legs.length - 1;
+					},
+					newGame: function() {
+						deleteAll("CurrentGame");
+						game.restoreLastState();
+						game.menuShown = false;
+					},
+					keyboardDelete: function() {
+						game.undo();
+					},
+					keyboardClose: function(x) {
+						this.closes = this.disabledCloses >= x ? this.closes : (this.disabledCloses == x - 1 && this.closes > x - 1 ? 0 : x);
+						if(this.closes > 0)
+							this.doubles = Math.max(this.doubles, 1);
+					},
+					keyboardOk: function() {
+						var t = game.lastLeg.throws;
+						var s = game.game[game.game.length - 1];
+						if(this.closes > 0) {
+							if(this.closes >= game.availableCloses()) {
+								game.nextThrow(this.closes * 10000 + this.doubles * 1000 + game.actualLeft());
+								game.lastLeg.next = 0;
+								game.newLeg();
+							}
+						} else {
+							game.nextThrow(this.doubles * 1000 + this.value);
+						}
+						game.updateAll();
+						this.game = game;
+						this.value = 0;
+						this.closes = 0;
+						this.doubles = game.minimumDoubles();
+						this.minimumDoubles = game.minimumDoubles();
+						this.disabledCloses = game.disabledCloses();
+						this.disabledDoubles = game.disabledDoubles();
+						gameComponent.legN = gameComponent.legs.length - 1;
+						this.scrollToView();
+						game.storeCurrentState();
+					},
+					scrollToView: function() {
+						var element = document.getElementById("scoring-throws");
+						if(element)
+					    	element.scrollTop = element.scrollHeight;
+					}
+				}
+			});
+			/*var swipeBlock = document.getElementById("scoring");
+			swipe(swipeBlock, { maxTime: 1000, minTime: 100, maxDist: 150,  minDist: 60 });
+			swipeBlock.addEventListener("swipe", function() {
+				if(e.detail.swipeType == "right") {
+					gameComponent.legN--;
+					if(gameComponent.legN < 0)
+						gameComponent.legN = 0;
+				}
+				if(e.detail.swipeType == "left") {
+					gameComponent.legN++;
+					if(gameComponent.legN >= gameComponent.legs.length)
+						gameComponent.legN = gameComponent.legs.length - 1;
+				}
+			});
+			*/
+			CreateObjectStore("CurrentGame", function() {
+				game.restoreLastState();
+			});
+		</script>
+	</body>
+</html>
