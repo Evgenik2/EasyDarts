@@ -6,6 +6,46 @@
 			name='viewport' 
 			content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' 
 		/>
+		<link rel="manifest" href='data:application/manifest+json,{
+			"name": "EasyDarts",
+			"short_name": "EasyDarts",
+			"icons": [
+				{
+					"src": "data:image/png;base64,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",
+					"sizes": "192x192",
+					"type": "image/png"
+				},
+				{
+					"src": "data:image/png;base64,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",
+					"sizes": "512x512",
+					"type": "image/png"
+				}
+			],
+			"theme_color": "#ffffff",
+			"background_color": "#ffffff",
+			"display": "standalone"
+		}'/>
+		<link rel="apple-touch-icon" sizes="180x180" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAMAAAAKE/YAAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAJcEhZcwAACxMAAAsTAQCanBgAAABCUExURUxpcQTQ/yDV/xrU/wPQ/zTZ/yPV/0nc/xDS/wnR//P9/4/p/wDN/////yDV//H8/2ni/0Pb/975/4zp/8f0/6zv/66KUuwAAAAMdFJOUwDld4/zP2AdsM6O24mDlw4AAAliSURBVHja1V3puqowDDwiAt4Pu/f9X/WyL9IlTQNq/57FsUwmk7S0f390o64f1b1pnreybKdRlrdn09yrR13/fd0Y4HZoW8/osffQvwhw0Ty9cHfQn03xDcAfFRDwBnj1+Cjiorm1iHHrJvxDrKhwiGfc1fU8edwzEE+474+LJ7lsCUZ53XTXxbMlG8+i/jXI18Amh3wB7OoEyAPs6jzFoAk/d0ieoyR1vsiFBbD+HWacyJH6Xranj5J2sh/P9pLxfBDq3K29aNyo1K9u2gtHU/8SNSgpUt3ai8ctW0WKsr18lMX3Kx2x9l0bgjTh+DnMeNSfxIxF/VnMONSfxoxB/XnM6ajpMDMpr0J9J4IsreLcCIb883tSHiTCrPlrGGjYCbmxosmDzL6WgYRdgn3Ig8YjMfPaDoNCfQN6vprGi0r12g+Bc6r1hcIh+Bvmlz1RQoqTML9UkB+MMXww0hCaqddx+PkhtVFcWYmkNRGhtQOzlx9sVsZO0VG0JsoqxgXaww+5/WUn7EiOeUgateMu0FxCVMYBO6zW9T9lrBaS5YbhyzlcsyiO7D/CDhLk3zQlHfQs5BYMWrueCdcJBKm3/6GLZo0E7tQOF2im3b9oEhTk3/vX7oALBMulG8ohEJlx/6KD/Y3XJzEptO0Uc/8PTPKEa9hESx/m10tDY3GW6B76HnmPO1vwDkCk8mJ2qKMnFot9waHtFngKbukKLiWg3PCoYwHLhR1ws8VtgZ7YJXhGAjnk44d7qt1GiQm7eYoKNN2OKTyaaaaCoA3IOPlNxw43tzKdHVwzaP5Z/oRBpjroSDvcfGW3SDP/7j8Is8OZiIpkd8c2/A4VfIORVl1K7YbuhvCkVhMBbQFurwL1A6Kwh1rWxQaYpYpYwnethtVYUqughxzShRJIhYmCfkuLD2jTgAnjV7HBsRmQnlsM6PKB9f4r7HclGRybBWl5RPB60NGOU51WGC6w1Ya9Y2tGZxnuWG12qxPD0A17ofagdByIOSp4L+4OjCo5DPckUTNH2EINBe7HGNRE70IR1TZYaugO6kgNlWepdoyW0S4Zsj8z6zY3KrFZJ5CYt1kR3QgTm8dsEyqFiOAFVLMhaCotHEnq1IXTYTCaF35UbcaYm3YmobYJsiMSzVUuO3ZtCy5I2BGL5ia7fcdGL8LTWB1Kh9FonqzeA71YMZV5RkzMBlIkkFni/nDyH+iG9Gj3h+wysQSSXZjF0nkrek1eCOptDyNO7EOzg/dD9WUDrG5ucig9Yl70aRK/mPuYijFu+rqmq2r6wZh/GcBDaiSlJ4ziMPPBcJzIrzI6ygOpK5xs8OOHT7PoR82mvG+yWskVsvc/EpO/w5vVhIXpbPPa33dcHE6yoX3K4Ja+SWHAnjsQiYg4FNzPS+392UxnkYm5j8Q62S2NxPR1mjyopU23KD7PVCeLx2Si/bx0Poe57WRZNuZePipUCOo09swGVrcUo0oUjzGYIrwUb4XMnLg5DeZOPpLEQ3NQahjnekY9U0PRrFH28pEAmsXo7ES91L9UmDvQzwTML2B3cUZttw0SMszt8w+ueGLsKaVoubWYsjeqeX9wxbNJqUFTbFDJBi0624tsE1DJxizUf3Dh0CzpETNMyQsbf2DhSP3ktfWl24+AliZVsNi6IkaOGQZaqlTB2m4v+AxowVMFS+xWqCFfmAlrNKMDrZODf2nwcR7f27bxYQq4/h4HrVNt+9rYMHL0HTbOv8DaLgK0TaXz0tjg/bcdM6MAdVDAaSiSXJjViXReV5mndY24WdrtYwJEQBkGzXSqOq+TNj2hsUK38NaeAIAOGqbkjVcr5kVwxqnXgCQE5cftj/IdOKaVw21ECKKT9tGO1pTyLQvtdhthghj4PlpM5RKjxrK34r0UDynIcf0FAJrqPYtND/fQFtOBxy5eyaDveatELt1ybAUZFUTHbDeU01XG4sXeOqiQeR4I4lTg4/pL1DOUD0RbzPXRJlILWl8sypRFxKUtRrE1Xdhlj5UMlTEiKngQ294vBeTLx5IeAtWNBu3OA3XbG4IN9WuNEtr7NhJIBCcaZvGGpnqmfKw1SvjRCocy9CaWL7vhoJueq6y1z9FZzG9OxAz8UfZ6ZU9vPA0LRVmRKJcQjPqccZch29ZkqMbTuM6cEYl6TdzxT99vzOrXx1BNnCZvmXkxdRxUkcntVPfUwC2/FHkL+iaxu2hXAempgeujTgv6SFLPK5kvZYGfPkx1L8XD0ilyBXTeJYsjtU1/z3DS6sEPYnu/Tc52oDkN2gRiijEFqZy2U5Wz8UogFiXGtMhzMK8b8zD80MCdMK5vmtH7bTI2E3YJmKvYRnuf2ctZMirw2za7UFKCpYfS2GHIaKNu3+FK5IdUOJGd92e1BOxI1Y9uvjCCtfhBjqdHhd30rXGeYXzHwWStde02fSdUAn0IYoJ/fMdBDqGoaA50APuPPgQxT3fIKD2pNP5l/fcXGaCh2H02yjP0ITiSasikNj8M4aGIDcHtYq/B86PCvOSuOSoEJzpvUymKH8c3zgqIbCh0CK6kwvOjQJwnoDnKTvYhuGsOYPnheouyiHp+VPpdQ3BntSTFRMemmlmczenbz2+kkjhv6n4zuAhiRlYa4lgLDvnFkEx0cKrTV7lmKhjHO5QW4z98xyH4DwXCHi9gnZlIIETPf/AE8dFc0rg5xRCi15x9ltGCWQeq8jRSh46AuRNiFv5iTCeT+n7+iTUD5kALJ5nU4VNrKqqDKkWoTmeJSh07rIuIIEJEW02GhhyEBGHxlhrcfsRP6npccWKsSIlEyJloxQWgB/sBjUTImXlXnP7IEnqQsDMV6wuOQTbgnPgEngN5Aa0tVD5u4IOdq9OPFdZA+SgTjnUuvkU+kg51vn+HfCQdEXq6hAzyIWiE4zrUBqB5X3dYr41r3vcdixzXvC88gFrHQH/jUd8iItRfeai6cJ9qlY/5zCP3e6H2Zpfc60bOutwgBDrzcoPzrpEYykTPibEEl9Gcc2GHPyXS3OlySjh6QTdUF7qccQmNcYK+EV7BdQJFnKCfpBdZ0WufA3RJfosV9RVWR9BnXHNGfFnYO+hTLgujvpZtD/qsa9mIObIDfeIFeKRXDW5A/84NiUty+aG7KOeMeA3kAXb+RaUj6Ivvhc29ErZzefzf9Tfw5l2+K//9+9Alzb93zfGE++culJ548nNXdy/Af+yS9BX5VdfR/wcLMczchiOyRQAAAFd6VFh0UmF3IHByb2ZpbGUgdHlwZSBpcHRjAAB4nOPyDAhxVigoyk/LzEnlUgADIwsuYwsTIxNLkxQDEyBEgDTDZAMjs1Qgy9jUyMTMxBzEB8uASKBKLgDqFxF08kI1lQAAAABJRU5ErkJggg==">
+		<link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAABLUExURUxpcQrR/wDO/wHP/wfP/4Ln/wDO/wLO/wLP/wDN/xbT/6/v/wDN//7//x/V/xHS/zLY/1jf/5ns/6jv/2ni/0Xb/+j7/7jx/8/2/+fpFpoAAAAMdFJOUwAcsG+U/cXeO/ErixDk5U0AAAAJcEhZcwAACxMAAAsTAQCanBgAAAFWSURBVDjLfVNXlsQwCHMKcZJ1xS33P+m6p80MHylPWMgCCOmxTyPdGNvoOO3kHetMWQ86rw94mDd2i20ebscX9orlQrJS9iHo+hHX6J4Zw5Xfeu5FfCsbn0vR8YdWyZYQOOeRQsc8y9hcCjiLBlTGleccM875IdmWiswJENZgTFFgdZJgIs69yhR7U6gNaBD5UyYCfsQfupOp6xOH1zU347noRMaGSwRncoYLCGCL7pG0CiqBwkTpNriLW2RruKs0GMS1J6TWd6KVD/JmeEmQql3lMEaUD6gJtzZDtM9iYvTJp1zi0iiJR3bJpZZ4qCLH04dQ5DnDnFVV03gaJQNWeYi6n5q61VI3ocKY04a9NosJ3W6noqHdidTvNd9DdSXRY2glcrsrRVOSDmu4EDxGrlTBOtjDl6GWRv4Y63xRccPfi5PGb1l/rB6qx+o9lxdey/t9/f8B4P0pQAP0HN0AAABXelRYdFJhdyBwcm9maWxlIHR5cGUgaXB0YwAAeJzj8gwIcVYoKMpPy8xJ5VIAAyMLLmMLEyMTS5MUAxMgRIA0w2QDI7NUIMvY1MjEzMQcxAfLgEigSi4A6hcRdPJCNZUAAAAASUVORK5CYII=">
+		<link rel="icon" type="image/png" sizes="16x16" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAA8UExURR7T/wDN/0fc/zXY/wDO/wDO/wDO/wDP/wDN/wrP/1jf/wHO/0zd/xzU/zfZ/2Dh/33m/5/t//z//+r7/1A4pP0AAAALdFJOUwGySqlKlKkZ5e+TDUjzAwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAItJREFUGNNFT1EWwyAIo6taHQho73/XBe3r+EAJJAEiRCqVuZZEO67ceEXL16qPVWlHOgL5atQynW30DH5Tk84+VO7pLVFBu7uDMOYtXKgGX0RYYpArxQBUZOi2ov2ou0I0gLo8oGHdLShLVJDMolVgC2CBAcCWMj8RQP6vDqG+V3+P0+e49/zzE/8fIUgJf5QGb/AAAABXelRYdFJhdyBwcm9maWxlIHR5cGUgaXB0YwAAeJzj8gwIcVYoKMpPy8xJ5VIAAyMLLmMLEyMTS5MUAxMgRIA0w2QDI7NUIMvY1MjEzMQcxAfLgEigSi4A6hcRdPJCNZUAAAAASUVORK5CYII=">
+		<link rel="mask-icon" href='data:image/svg;base64,PHN2ZyB2ZXJzaW9uPSIxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2ODIuNjY3IiBoZWlnaHQ9IjY4Mi42NjciIHZpZXdCb3g9IjAgMCA1MTIuMDAwMDAwIDUxMi4wMDAwMDAiPjxwYXRoIGQ9Ik0yMjguNSAxLjFjLTM2LjQgNC4zLTc1LjMgMTcuMy0xMDMuMyAzNC42LTIyLjEgMTMuNi0zMi40IDIxLjctNDkuNiAzOC44LTEyLjEgMTItMTUuOCAxNi4xLTIxLjYgMjQtMi41IDMuMy01LjIgNi44LTYgNy43LTEuOSAyLjMtOS42IDE0LjUtMTEuMiAxNy44LS43IDEuNC0xLjkgMy4xLTIuNyAzLjktMiAyLjItMTMuNCAyNi4yLTE3LjUgMzYuOUM0LjYgMTk2LjItLjEgMjI0LjIuNSAyNjBjLjIgMTIuNC43IDI0LjMgMSAyNi41IDIuNCAxNSAzLjkgMjMuMyA2LjEgMzIgOS40IDM3LjcgMjguMyA3NC4yIDU0LjEgMTA0LjcgMS41IDEuOCA4LjMgOC44IDE1LjEgMTUuNSAxNC43IDE0LjcgMzEuNCAyNy42IDUwLjIgMzguOCA2LjcgMy45IDMwLjcgMTUuNSAzMi4zIDE1LjUuNyAwIDEuNy40IDIuMy45IDIuOSAyLjkgMzguMyAxMi45IDUxLjkgMTQuNyAyLjguMyA1LjMuOCA1LjYgMSAxLjggMS4xIDIwLjEgMS45IDQwLjkgMS44IDIwLjUtLjEgMjUuMy0uNCAzOC0yLjcgMjYuMS00LjYgNDguNS0xMS45IDcwLjUtMjIuOCAxNS41LTcuNyAxOS45LTEwLjEgMjAuMy0xMS4xLjItLjQuOS0uOCAxLjUtLjggMS40IDAgMjMuMi0xNS42IDMwLjgtMjIgOS03LjYgMjcuMS0yNiAzNC4zLTM1IDMwLjctMzguMyA1MS4yLTg4LjEgNTUuNC0xMzQuNSAxLjEtMTIuNy43LTUwLjItLjYtNTkuNS02LjgtNDYuMy0yMS45LTgzLTUwLjctMTIyLjktOC43LTExLjktMzEuMi0zNC43LTQ0LjgtNDUuMkMzNzYuMyAyNS4xIDMzNC40IDcuOCAyODYgMS42Yy0xMS42LTEuNS00Ni40LTEuOC01Ny41LS41eiIvPjwvc3ZnPg==' color="#5bbad5">
+		<meta name="apple-mobile-web-app-title" content="EasyDarts">
+		<meta name="application-name" content="EasyDarts">
+		<meta name="msapplication-TileColor" content="#da532c">
+		<meta name="theme-color" content="#ffffff">
+		<script>
+			function registerServiceWorker() {
+			// регистрирует скрипт sw в поддерживаемых браузерах
+				if ('serviceWorker' in navigator) {
+					navigator.serviceWorker.register('sw.js', { scope: '/' }).then(() => {
+					console.log('Service Worker registered successfully.');
+					}).catch(error => {
+					console.log('Service Worker registration failed:', error);
+					});
+				}
+			}
+		</script>
+		<script src="vue.js"></script>
 		<style>
 			@media all and (orientation:landscape) {
 				#dartsGame {
@@ -48,7 +88,7 @@
 
 			#scoring {
 				display: flex;
-				flex: 1.3;
+				flex: 1;
 				flex-direction: column;
 				align-self: stretch;
 			}
@@ -80,19 +120,6 @@
 				align-self: stretch;
 				margin-right: 1vmax;
 			}
-			.keyboard-input {
-				text-align: center;
-				display: flex;
-				flex: 1;
-				margin: 3vmax;
-				background: white;
-				color: #666666;
-				font-size: 6vmax;
-				justify-content: center;
-				align-items: center;
-				border-radius: 20%;
-				border-color: transparent;
-			}
 			.keyboard-input:active, .keyboard-input:focus {
 				border-color: transparent;
 				outline: none;
@@ -107,6 +134,11 @@
 				justify-content: center;
 				font-size: 6vmax;
 			}
+			.keyboard-double-row {
+				flex: 2;
+				margin-top:2vmax;
+				margin-bottom:2vmax;
+			}
 			.keyboard-score-row {
 				display: flex;
 				flex: 1;
@@ -115,17 +147,11 @@
 				justify-content: center;
 				align-items: center;
 			}
-			.element-hidden {
-				visibility: hidden;
-			}
 			.keyboard-score {
 				display: flex;
 				flex: 1;
 				flex-direction: column;
 				align-self: stretch;
-			}
-			.element-collapsed {
-				display: none;
 			}
 			.regular-key {
 				text-align: center;
@@ -212,6 +238,95 @@
 				border-color: #aaaaaa;
 				background: #aaaaaa;
 			}
+			.keyboard-input {
+				text-align: center;
+				display: flex;
+				flex: 2;
+				margin-left: 2vmax;
+				margin-right: 2vmax;
+				margin-top: 0.5vmax;
+				margin-bottom: 0.5vmax;
+				background: white;
+				color: #666666;
+				font-size: 2vmax;
+				justify-content: center;
+				align-items: center;
+				border-radius: 20%;
+				border-color: transparent;
+			}
+			.keyboard-text {
+				display: flex;
+				flex: 1;
+				flex-direction: row;
+				align-items: center;
+				margin: 2vmax;
+				color: #666666;
+				font-size: 2vmax;
+			}
+			.keyboard-text-span {
+				display: inline-block;
+				vertical-align: middle;
+			}
+			.menu-key:active {
+				background: #888888;
+			}
+			.menu-key {
+				text-align: center;
+				display: flex;
+				flex: 1;
+				margin-left: 2vmax;
+				margin-right: 2vmax;
+				margin-top: 0.5vmax;
+				margin-bottom: 0.5vmax;
+				background: #449def;
+				color: white;
+				font-size: 2vmax;
+				justify-content: center;
+				align-items: center;
+				border-radius: 20%;
+			}
+			.menu-centered-row {
+				align-items: center;
+			}
+			.menu-options-row {
+				display: flex;
+				flex: 2;
+				flex-direction: row;
+				align-items: stretch;
+			}
+			.menu-options-double-row {
+				display: flex;
+				flex: 4;
+				flex-direction: row;
+				align-items: stretch;
+			}
+			.menu-options-row::-webkit-scrollbar {
+				display: none;
+			}
+			.menu-options-row-group {
+				display: flex;
+				flex: 2;
+				flex-direction: column;
+				align-items: stretch;
+			}
+			.menu-game-length-key {
+				text-align: center;
+				display: flex;
+				margin: 0.3vmax;
+				padding: 1vmax;
+				background: #888888;
+				color: white;
+				font-size: 2vmax;
+				justify-content: center;
+				align-items: center;
+				border: 0.3vmax solid #888888;
+				border-radius: 100%;
+				height: 2vmax;
+			}
+			.menu-game-length-checked {
+				border-color: #449def;
+				background: #449def;
+			}
 			.scoring-data {
 				margin: 1vmax;
 				display: flex;
@@ -258,6 +373,22 @@
 				justify-content: center;
 				align-items: center;
 			}
+			.scoring-leg-group {
+				display: flex;
+				flex: 1;
+				background: #888888;
+				color: white;
+				font-size: 2vmax;
+				justify-content: center;
+				align-items: center;
+				flex-direction: column;
+			}
+			.scoring-leg-separator {
+				display: flex;
+				background: white;
+				height: 1px;				
+				align-self: stretch;
+			}
 			.scoring-throw {
 				display: flex;
 				flex: 1;
@@ -290,7 +421,7 @@
 				background: #ffa8a8
 			}
 			.keyboard-stats {
-				flex: 1.3;
+				flex: 1;
 				flex-direction: row;
 				margin: 0.3vmax;
 				font-size: 1.5vmax;
@@ -368,8 +499,13 @@
 				margin-left: 0.1vmax;
 				margin-bottom: 0.2vmax;
 			}
+			.element-hidden {
+				visibility: hidden;
+			}
+			.element-collapsed {
+				display: none;
+			}
 		</style>
-		<script src="https://cdn.jsdelivr.net/npm/vue@2.5.22/dist/vue.js"></script>
 		<script>
 			var swipe = function(el, settings) {
 				var settings = Object.assign({}, {
@@ -674,7 +810,14 @@
 					<div class="scoring-data">
 						<div class="scoring-head">
 							<div class="scoring-player">{{item.player1}}</div>
-							<div class="scoring-leg">Leg {{item.leg}}</div>
+							<div class="scoring-leg">
+								<div class="scoring-leg">
+									Set {{item.set}}
+								</div>
+								<div class="scoring-leg">
+									Leg {{item.leg}}
+								</div>
+							</div>
 							<div class="scoring-player">{{item.player2}}</div>
 						</div>
 						<div id="scoring-throws">
@@ -696,16 +839,67 @@
 				<div id="keyboard-keys">
 					<div id="keyboard-menu" class="keyboard-menu" v-bind:class="{ 'element-collapsed': !game.menuShown }">
 							<div class="keyboard-row">
-									First player: <input class="score-key keyboard-input" v-model="game.player1" @change="updateAll"/>
+									<div class="keyboard-text"><div class="keyboard-text-span">First player:</div></div>
+									<input class="keyboard-input" v-model="game.player1" @change="updateAll"/>
 							</div>
 							<div class="keyboard-row">
-									Second player: <input class="score-key keyboard-input" v-model="game.player2" @change="updateAll"/>
+									<div class="keyboard-text"><div class="keyboard-text-span"></div>Second player:</span></div>
+									<input class="score-key keyboard-input" v-model="game.player2" @change="updateAll"/>
+							</div>
+							<div class="keyboard-row menu-centered-row keyboard-double-row">
+								<div class="keyboard-text"><div class="keyboard-text-span"></div>Game:</span></div>
+								<div class="menu-options-row-group"> 
+									<div class="menu-options-row">
+										<div class="menu-game-length-key" v-bind:class="{ 'menu-game-length-checked': newGameLength == 101 }" v-on:click="newGameLength = 101">101</div>
+										<div class="menu-game-length-key" v-bind:class="{ 'menu-game-length-checked': newGameLength == 301 }" v-on:click="newGameLength = 301">301</div>
+										<div class="menu-game-length-key" v-bind:class="{ 'menu-game-length-checked': newGameLength == 501 }" v-on:click="newGameLength = 501">501</div>
+										<div class="menu-game-length-key" v-bind:class="{ 'menu-game-length-checked': newGameLength == 701 }" v-on:click="newGameLength = 701">701</div>
+									</div>
+									<div class="menu-options-row">
+										<div class="menu-game-length-key" v-bind:class="{ 'menu-game-length-checked': newGameLength == 1001 }" v-on:click="newGameLength = 1001">1001</div>
+										<div class="menu-game-length-key" v-bind:class="{ 'menu-game-length-checked': newGameLength == 2001 }" v-on:click="newGameLength = 2001">2001</div>
+									</div>
+								</div>
+							</div>
+							<div class="keyboard-row menu-centered-row">
+								<div class="keyboard-text"><div class="keyboard-text-span"></div>Sets:</span></div>
+								<div class="menu-options-row">
+									<div class="menu-game-length-key" v-bind:class="{ 'menu-game-length-checked': newSetLength == 1 }" v-on:click="newSetLength = 1">1</div>
+									<div class="menu-game-length-key" v-bind:class="{ 'menu-game-length-checked': newSetLength == 2 }" v-on:click="newSetLength = 2">2</div>
+									<div class="menu-game-length-key" v-bind:class="{ 'menu-game-length-checked': newSetLength == 3 }" v-on:click="newSetLength = 3">3</div>
+									<div class="menu-game-length-key" v-bind:class="{ 'menu-game-length-checked': newSetLength == 4 }" v-on:click="newSetLength = 4">4</div>
+									<div class="menu-game-length-key" v-bind:class="{ 'menu-game-length-checked': newSetLength == 5 }" v-on:click="newSetLength = 5">5</div>
+									<div class="menu-game-length-key" v-bind:class="{ 'menu-game-length-checked': newSetLength == 6 }" v-on:click="newSetLength = 6">6</div>
+								</div>
+							</div>
+							<div class="keyboard-row menu-centered-row keyboard-double-row">
+								<div class="keyboard-text"><div class="keyboard-text-span"></div>Legs:</span></div>
+								<div class="menu-options-row-group"> 
+									<div class="menu-options-row">
+										<div class="menu-game-length-key" v-bind:class="{ 'menu-game-length-checked': newLegLength == 1 }" v-on:click="newLegLength = 1">1</div>
+										<div class="menu-game-length-key" v-bind:class="{ 'menu-game-length-checked': newLegLength == 2 }" v-on:click="newLegLength = 2">2</div>
+										<div class="menu-game-length-key" v-bind:class="{ 'menu-game-length-checked': newLegLength == 3 }" v-on:click="newLegLength = 3">3</div>
+										<div class="menu-game-length-key" v-bind:class="{ 'menu-game-length-checked': newLegLength == 4 }" v-on:click="newLegLength = 4">4</div>
+										<div class="menu-game-length-key" v-bind:class="{ 'menu-game-length-checked': newLegLength == 5 }" v-on:click="newLegLength = 5">5</div>
+										<div class="menu-game-length-key" v-bind:class="{ 'menu-game-length-checked': newLegLength == 6 }" v-on:click="newLegLength = 6">6</div>
+									</div>
+									<div class="menu-options-row">
+											<div class="menu-game-length-key" v-bind:class="{ 'menu-game-length-checked': newLegLength == 7 }" v-on:click="newLegLength = 7">7</div>
+											<div class="menu-game-length-key" v-bind:class="{ 'menu-game-length-checked': newLegLength == 8 }" v-on:click="newLegLength = 8">8</div>
+											<div class="menu-game-length-key" v-bind:class="{ 'menu-game-length-checked': newLegLength == 9 }" v-on:click="newLegLength = 9">9</div>
+											<div class="menu-game-length-key" v-bind:class="{ 'menu-game-length-checked': newLegLength == 10 }" v-on:click="newLegLength = 10">10</div>
+											<div class="menu-game-length-key" v-bind:class="{ 'menu-game-length-checked': newLegLength == 11 }" v-on:click="newLegLength = 11">11</div>
+									</div>
+								</div>
+							</div>
+							<div class="keyboard-row menu-centered-row">
+								<div class="menu-game-length-key" v-bind:class="{ 'menu-game-length-checked': game.newNoStartSwap }" v-on:click="game.newNoStartSwap = !game.newNoStartSwap">Maid first</div>
 							</div>
 							<div class="keyboard-row">
-								<div class="score-ok-key" v-on:click="newGame()">New game</div>
+								<div class="menu-key" v-on:click="newGame()">New game</div>
 							</div>
 							<div class="keyboard-row">
-									<div class="score-ok-key" v-on:click="game.menuShown = false">Continue</div>
+									<div class="menu-key" v-on:click="game.menuShown = false">Continue</div>
 							</div>
 
 					</div>
@@ -762,7 +956,18 @@
 						<div class="scoring-data">
 							<div class="scoring-head">
 								<div class="scoring-player" v-on:click="prev">{{legs[legN].player1}}</div>
-								<div class="scoring-leg">Leg {{legs[legN].leg + 1}}</div>
+								<div class="scoring-leg" v-bind:class="{ 'element-collapsed': showSeparator }">
+									Leg {{legs[legN].leg + 1}}
+								</div>
+								<div class="scoring-leg-group" v-bind:class="{ 'element-collapsed': !showSeparator }">
+									<div class="scoring-leg">
+										Set {{legs[legN].set + 1}}
+									</div>
+									<div class="scoring-leg-separator"></div>
+									<div class="scoring-leg">
+										Leg {{legs[legN].leg + 1}}
+									</div>
+								</div>
 								<div class="scoring-player" v-on:click="next">{{legs[legN].player2}}</div>
 							</div>
 							<div id="scoring-throws">
@@ -789,6 +994,7 @@
 			var gameComponent;
 			var statsList;
 			var keyboardKeys;
+			var scoringStats;
 			var game = {
 					menuShown: true,
 					player1: 'player 1',
@@ -798,6 +1004,8 @@
 					gameLength: 501,
 					noStartSwap: false,
 					step: 0,
+					wonSets1: 0,
+					wonSets2: 0,
 					game: [ 
 						[//set
 							{//leg
@@ -860,14 +1068,15 @@
 							for(var j = 0; j < this.game[i].length; j++) {
 								var l = this.game[i][j];
 								l.firstThrows.forEach((v) => {
-									if(v == 180) this.stats[2].player1+=1;
-									else if(v >= 140) this.stats[1].player1+=1;
-									else if(v >= 100) this.stats[0].player1+=1;
+									var vv = v % 1000;
+									if(vv == 180) this.stats[2].player1 += 1;
+									else if(vv >= 140) this.stats[1].player1 += 1;
+									else if(vv >= 100) this.stats[0].player1+=1;
 									fThrow += 1;
-									fTotal += v;
+									fTotal += vv;
 									if(v > 10000) {
-										this.stats[4].player1 = Math.max(this.stats[0].player1, v % 1000);
-										fBst = Math.max(fBst, v % 1000);
+										this.stats[4].player1 = Math.max(this.stats[0].player1, vv);
+										fBst = Math.max(fBst, vv);
 									}
 									if(v > 1000)
 										fDbl += Math.floor(v % 10000 / 1000);
@@ -889,14 +1098,15 @@
 							for(var j = 0; j < this.game[i].length; j++) {
 								var l = this.game[i][j];
 								l.secondThrows.forEach((v) => {
-									if(v == 180) this.stats[2].player2+=1;
-									else if(v >= 140) this.stats[1].player2+=1;
-									else if(v >= 100) this.stats[0].player2+=1;
+									var vv =  v % 1000;
+									if(vv == 180) this.stats[2].player2+=1;
+									else if(vv >= 140) this.stats[1].player2+=1;
+									else if(vv >= 100) this.stats[0].player2+=1;
 									sThrow += 1;
-									sTotal += v;
+									sTotal += vv;
 									if(v > 10000) {
-										this.stats[4].player2 = Math.max(this.stats[0].player2, v % 1000);
-										sBst = Math.max(sBst, v % 1000);
+										this.stats[4].player2 = Math.max(this.stats[0].player2, vv);
+										sBst = Math.max(sBst, vv);
 									}
 									if(v > 1000)
 										sDbl += Math.floor(v % 10000 / 1000);
@@ -918,18 +1128,40 @@
 						game.lastLeg = game.getVisualLeg(game.game.length - 1, game.game[game.game.length - 1].length - 1);
 						game.updateStats();
 						var res = [];
-						for(var i = 0; i < game.game.length; i++)
+						game.wonSets1 = 0;
+						game.wonSets2 = 0;
+						for(var i = 0; i < game.game.length; i++) {
+							game.game[i].wonLegs1 = 0;
+							game.game[i].wonLegs2 = 0;
 							for(var j = 0; j <  game.game[i].length; j++) {
-								res.push(game.getVisualLeg(i, j));
+								var l = game.getVisualLeg(i, j);
+								res.push(l);
+								game.game[i].wonLegs1 += l.left1 > 0 ? 0 : 1;
+								game.game[i].wonLegs2 += l.left2 > 0 ? 0 : 1;
 							}
+							if(game.game[i].wonLegs1 >  Math.floor(game.legLength / 2)) 
+								game.wonSets1 += 1;
+							if(game.game[i].wonLegs2 >  Math.floor(game.legLength / 2)) 
+								game.wonSets2 += 1;
+						}
+						gameComponent.showSeparator = game.setLength > 1;
 						gameComponent.legN = res.length - 1;
 						gameComponent.legs = res;
+						keyboardKeys.newGameLength = game.gameLength;
+						keyboardKeys.newLegLength = game.legLength;
+						keyboardKeys.newSetLength = game.setLength;
+						keyboardKeys.newNoStartSwap = game.noStartSwap;
 						keyboardKeys.game = game;
 						keyboardKeys.doubles = Math.max(keyboardKeys.doubles, game.minimumDoubles());
 						keyboardKeys.minimumDoubles = game.minimumDoubles();
 						keyboardKeys.disabledCloses = game.disabledCloses();
 						keyboardKeys.disabledDoubles = game.disabledDoubles();
 						gameComponent.legN = gameComponent.legs.length - 1;
+						scoringStats.game = { name: "Best of " + game.setLength + " sets of " + game.legLength + " legs", player1: game.player1, player2: game.player2 },
+						scoringStats.stats = [
+												{ name: "Sets", player1: game.wonSets1, player2: game.wonSets2 },
+												{ name: "Legs", player1: game.game[game.game.length - 1].wonLegs1, player2: game.game[game.game.length - 1].wonLegs2 },
+											];
 						keyboardKeys.scrollToView();
 					},
 					nextThrow: function(value) {
@@ -944,8 +1176,10 @@
 					},
 					newLeg: function() {
 						if(this.lastLeg.next != 0) return;
-						if(this.game[this.game.length - 1].length >= this.legLength) {
-							if(this.game.length >= this.setLength) return;
+						game.updateAll();
+						var s = this.game[this.game.length - 1];
+						if(s.wonLegs1 >  Math.floor(this.legLength / 2) || s.wonLegs2 >  Math.floor(this.legLength / 2) || s.length >= this.legLength) {
+							if(this.game.length >= this.setLength || this.wonSets1 > Math.floor(this.setLength / 2) || this.wonSets2 > Math.floor(this.setLength / 2)) return;
 							this.game.push([]);
 						}
 						this.game[this.game.length - 1].push({ firstThrows: [], secondThrows: [] });
@@ -992,7 +1226,7 @@
 								left2: game.gameLength,
 								throw: 0,
 								startsFirst: true,
-								next: 0,
+								next: 0,		
 								throws: [
 									{
 										throw1: "",
@@ -1047,6 +1281,7 @@
 			gameComponent = new Vue({
 				el: "#game-component",
 				data: {
+					showSeparator: false,
 					legN: 1,
 					legs: []
 				},
@@ -1069,7 +1304,7 @@
 					stats: game.stats
 				}
 			});
-			new Vue({
+			scoringStats = new Vue({
 				el: "#scoring-stats",
 				data: {
 					game: { name: "Best of 1 sets of 5 legs", player1: "Player 1", player2: "Player 2" },
@@ -1082,6 +1317,10 @@
 			keyboardKeys = new Vue({
 				el: "#keyboard-keys",
 				data: {
+					newSetLength: game.setLength,
+					newLegLength: game.legLength,
+					newGameLength: game.gameLength,
+					newNoStartSwap: game.noStartSwap,
 					game: game,
 					value: 0,
 					doubles: 0,
@@ -1112,6 +1351,10 @@
 						gameComponent.legN = gameComponent.legs.length - 1;
 					},
 					newGame: function() {
+						game.setLength = this.newSetLength;
+						game.legLength = this.newLegLength;
+						game.gameLength = this.newGameLength;
+						game.noStartSwap = this.newNoStartSwap;
 						deleteAll("CurrentGame");
 						game.restoreLastState();
 						game.menuShown = false;
