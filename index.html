@@ -652,13 +652,13 @@
 				game.updateAll();
 			}
 			CreateObjectStore("Settings", function() {
-				settings.restore();
-				updateAll();
+				CreateObjectStore("CurrentGame", function() {
+					game.restoreLastState();
+					settings.restore();
+					updateAll();
+				});
 			});
-			CreateObjectStore("CurrentGame", function() {
-				game.restoreLastState();
-				updateAll();
-			});
+
 		</script>
 	</body>
 </html>
