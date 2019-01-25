@@ -124,7 +124,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="keyboard-stats">
+				<div class="keyboard-stats" v-bind:class="{ 'element-collapsed': menuShown }">
 					<div id="stats-list" class="keyboard-stats-list">
 						<stats-component is="stats-component" v-for="item in stats" v-bind:item="item" v-bind:key="item.name">
 						</stats-component>
@@ -156,14 +156,14 @@
 							</div>
 						</div>
 				</div>
-				<div class="keyboard-stats">
+				<div class="keyboard-stats" v-bind:class="{ 'element-collapsed': menuShown }">
 					<div id="scoring-stats" class="keyboard-stats-list">
 						<div class="stat-game-way-player"> 
-								<div class="stat-game-way-head">{{game.name}}</div>
-								<div class="stat-game-way">{{game.player1}}</div>
-								<div class="stat-game-way">{{game.player2}}</div>
+								<div class="stat-game-way-head">{{gameStat.name}}</div>
+								<div class="stat-game-way">{{gameStat.player1}}</div>
+								<div class="stat-game-way">{{gameStat.player2}}</div>
 						</div>
-						<game-way-component is="game-way-component" v-for="item in stats" v-bind:item="item" v-bind:key="item.name">
+						<game-way-component is="game-way-component" v-for="item in statsSetLeg" v-bind:item="item" v-bind:key="item.name">
 						</game-way-component>
 					</div>
 				</div>
@@ -171,10 +171,7 @@
 		  </div>
 		</div>
 		<script defer>
-			var gameComponent;
-			var statsList;
 			var keyboardKeys;
-			var scoringStats;
 			
 			var game = {
 					player1: 'Player 1',
@@ -301,7 +298,7 @@
 								this.stats[7].player2 = sBst;
 								this.stats[8].player2 = sLwat;
 							}
-						statsList.stats = this.stats;
+						keyboardKeys.stats = this.stats;
 					},
 					updateAll: function() {
 						game.lastLeg = game.getVisualLeg(game.game.length - 1, game.game[game.game.length - 1].length - 1);
@@ -323,9 +320,9 @@
 							if(game.game[i].wonLegs2 >  Math.floor(game.legLength / 2)) 
 								game.wonSets2 += 1;
 						}
-						gameComponent.showSeparator = game.setLength > 1;
-						gameComponent.legN = res.length - 1;
-						gameComponent.legs = res;
+						keyboardKeys.showSeparator = game.setLength > 1;
+						keyboardKeys.legN = res.length - 1;
+						keyboardKeys.legs = res;
 						keyboardKeys.newGameLength = settings.newGameLength;
 						keyboardKeys.newLegLength = settings.newLegLength;
 						keyboardKeys.newSetLength = settings.newSetLength;
@@ -335,13 +332,13 @@
 						keyboardKeys.minimumDoubles = game.minimumDoubles();
 						keyboardKeys.disabledCloses = game.disabledCloses();
 						keyboardKeys.disabledDoubles = game.disabledDoubles();
-						gameComponent.legN = gameComponent.legs.length - 1;
-						scoringStats.game = { 
+						keyboardKeys.legN = keyboardKeys.legs.length - 1;
+						keyboardKeys.gameStat = { 
 							name: "Best of " + game.setLength + " sets of " + game.legLength + " legs", 
 							player1: settings.getEnding(this.lastLeg.left1, game.player1), 
 							player2: settings.getEnding(this.lastLeg.left2, game.player2)
 						},
-						scoringStats.stats = [
+						keyboardKeys.statsSetLeg = [
 												{ name: "Sets", player1: game.wonSets1, player2: game.wonSets2 },
 												{ name: "Legs", player1: game.game[game.game.length - 1].wonLegs1, player2: game.game[game.game.length - 1].wonLegs2 },
 											];
@@ -461,9 +458,27 @@
 						return legRes;
 					}
 				};
-			gameComponent = new Vue({
-				el: "#game-component",
+			keyboardKeys = new Vue({
+				el: "#dartsGame",
 				data: {
+					newSetLength: settings.newSetLength,
+					newLegLength: settings.newLegLength,
+					newGameLength: settings.newGameLength,
+					newNoStartSwap: settings.newStartSwap,
+					game: game,
+					value: 0,
+					doubles: 0,
+					closes: 0,
+					disabledDoubles: 0,
+					disabledCloses: 0,
+					minimumDoubles: 0,
+					menuShown: true,
+					stats: game.stats,
+					gameStat: { name: "Best of 1 sets of 5 legs", player1: "Player 1", player2: "Player 2" },
+					statsSetLeg: [
+						{ name: "Sets", player1: "0", player2: "0", width: 1 },
+						{ name: "Legs", player1: "0", player2: "0", width: 1 },
+					],
 					showSeparator: false,
 					legN: 0,
 					legs: [ {
@@ -487,51 +502,6 @@
 								]
 							} ]
 				},
-				methods: {
-					prev: function() {
-						this.legN--;
-						if(this.legN < 0)
-							this.legN = 0;
-					},
-					next: function() {
-						this.legN++;
-						if(this.legN >= this.legs.length)
-						this.legN = this.legs.length - 1;
-					}
-				}
-			});
-			statsList = new Vue({
-				el: "#stats-list",
-				data: {
-					stats: game.stats
-				}
-			});
-			scoringStats = new Vue({
-				el: "#scoring-stats",
-				data: {
-					game: { name: "Best of 1 sets of 5 legs", player1: "Player 1", player2: "Player 2" },
-					stats: [
-						{ name: "Sets", player1: "0", player2: "0", width: 1 },
-						{ name: "Legs", player1: "0", player2: "0", width: 1 },
-					]
-				}
-			});
-			keyboardKeys = new Vue({
-				el: "#keyboard-keys",
-				data: {
-					newSetLength: settings.newSetLength,
-					newLegLength: settings.newLegLength,
-					newGameLength: settings.newGameLength,
-					newNoStartSwap: settings.newStartSwap,
-					game: game,
-					value: 0,
-					doubles: 0,
-					closes: 0,
-					disabledDoubles: 0,
-					disabledCloses: 0,
-					minimumDoubles: 0,
-					menuShown: true
-				},
 				watch: {
 					'game.player1': function(val, preVal){
 						game.updateAll();
@@ -544,6 +514,16 @@
 					updateAll: function() {
 						game.updateAll();
 					},
+					prev: function() {
+						this.legN--;
+						if(this.legN < 0)
+							this.legN = 0;
+					},
+					next: function() {
+						this.legN++;
+						if(this.legN >= this.legs.length)
+						this.legN = this.legs.length - 1;
+					},
 					keyboardClick: function (value) {
 						var v = this.value * 10 + value;
 						if(v > 180)
@@ -551,7 +531,7 @@
 						if(!game.validateNumber(v))
 							v = 0;
 						this.value = v;
-						gameComponent.legN = gameComponent.legs.length - 1;
+						this.legN = this.legs.length - 1;
 					},
 					newGame: function() {
 						game.setLength = this.newSetLength;
@@ -622,7 +602,7 @@
 						this.minimumDoubles = game.minimumDoubles();
 						this.disabledCloses = game.disabledCloses();
 						this.disabledDoubles = game.disabledDoubles();
-						gameComponent.legN = gameComponent.legs.length - 1;
+						this.legN = this.legs.length - 1;
 						this.scrollToView();
 						game.storeCurrentState();
 					},

@@ -22,11 +22,8 @@ function CreateObjectStore(storeName, f) {
         secondRequest.onerror = function() {};
         secondRequest.onupgradeneeded = function (e) {
             var database = e.target.result;
-            if(!database.objectStoreNames.contains(storeName)) {
-                var objectStore = database.createObjectStore(storeName, {
-                    keyPath: "key"
-                });
-            }
+            if(!database.objectStoreNames.contains(storeName))
+                var objectStore = database.createObjectStore(storeName, { keyPath: "key" });
         };
         secondRequest.onsuccess = function (e) {
             e.target.result.close();

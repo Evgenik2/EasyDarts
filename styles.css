@@ -95,6 +95,7 @@ html, body {
     flex: 1;
     flex-direction: column;
     align-self: stretch;
+    margin-right: 1vmax;
 }
 .regular-key {
     text-align: center;
