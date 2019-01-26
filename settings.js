@@ -4,6 +4,7 @@ var settings = {
     newGameLength: 501,
     newNoStartSwap: false,
     endings: "Default",
+    language: "en",
     getEnding: function(value, defaultValue) { 
         var e = endings[this.endings]; 
         if(e[value] == undefined)
@@ -19,7 +20,8 @@ var settings = {
                 settings.store();
             else {
                 var r = JSON.parse(data);
-                settings.endings = r.endings;
+                settings.endings = r.endings == undefined ? "Default" : r.endings;
+                settings.language = r.language == undefined ? "en" : r.language;
                 keyboardKeys.newSetLength = settings.newSetLength = r.newSetLength;
                 keyboardKeys.newLegLength = settings.newLegLength = r.newLegLength;
                 keyboardKeys.newGameLength = settings.newGameLength = r.newGameLength;

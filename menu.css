@@ -70,6 +70,19 @@
     border: 0.3vmax solid #888888;
     height: 2vmax;
 }
+.menu-maidenFirst {
+    flex: 1;
+    text-align: center;
+    display: flex;
+    padding: 0.8vmax 0 0.8vmax 0;
+    background: #888888;
+    color: white;
+    font-size: 2vmax;
+    justify-content: center;
+    align-items: center;
+    border: 0.3vmax solid #888888;
+    height: 2vmax;
+}
 .menu-game-length-checked {
     border-color: #449def;
     background: #449def;

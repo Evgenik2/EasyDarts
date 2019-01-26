@@ -1,5 +1,35 @@
 var languages = {
     "en": {
-        
+        menuNoStartSwap: "Maiden first",
+        menuFirstPlayer: "First player: ",
+        menuSecondPlayer: "Second player",
+        menuGame: "Game: ",
+        menuSets: "Sets: ",
+        menuLegs: "Legs: ",
+        menuNewGame: "New Game",
+        menuContinue: "Continue",
+        keyboardMenu: "M",
+        keyboardOk: "Ok",
+        set: "Set ",
+        leg: "Leg ",
+        sets: "Sets",
+        legs: "Legs",
+    },
+    "ru": {
+        menuNoStartSwap: "Девушки начинают",
+        menuFirstPlayer: "Первый игрок: ",
+        menuSecondPlayer: "Второй игрок",
+        menuGame: "Игра: ",
+        menuSets: "Сетов: ",
+        menuLegs: "Легов: ",
+        menuNewGame: "Новая игра",
+        menuContinue: "Продолжить",
+        keyboardMenu: "М",
+        keyboardOk: "Да",
+        set: "Сет ",
+        leg: "Лег ",
+        sets: "Сеты",
+        legs: "Леги",
     }
+
 };

@@ -1,6 +1,6 @@
 var indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB,
 IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction || window.msIDBTransaction,
-baseName = "easydarts1";
+baseName = "easydarts2";
 
 function logerr(err){
     console.log(err);
