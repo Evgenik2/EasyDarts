@@ -22,6 +22,7 @@
 		<script src="settings.js"></script>
 		<script src="vueComponents.js"></script>
 		<script src="language.js"></script>
+		<link href="media.css" rel="stylesheet" type="text/css" />
 		<script>
 			function registerServiceWorker() {
 				if ('serviceWorker' in navigator) {
@@ -40,9 +41,9 @@
 			<div id="keyboard">
 				<div id="keyboard-keys">
 					<div id="keyboard-menu" class="keyboard-menu" v-bind:class="{ 'menu-collapsed': !menuShown }">
-							<div class="menu-row">
+							<div class="menu-row menu-entering-collapsed">
 								<div class="menu-maidenFirst" v-bind:class="{ 'menu-game-length-checked': newNoStartSwap }" v-on:click="menuKeyClick('noStartSwap')">{{language.menuNoStartSwap}}</div>
-								<div class="menu-inc-key" v-on:click="changeLanguage()">{{languageName}}</div>
+								<div class="menu-inc-key" v-on:click="changeLanguage()">{{language.language}}</div>
 							</div>
 							<div class="menu-row">
 								<div class="menu-text"><div class="menu-text-span">{{language.menuFirstPlayer}}</div></div>
@@ -52,7 +53,7 @@
 								<div class="menu-text"><div class="menu-text-span"></div>{{language.menuSecondPlayer}}</span></div>
 								<input class="menu-input" v-model="game.player2"/>
 							</div>
-							<div class="menu-row">
+							<div class="menu-row menu-entering-collapsed">
 								<div class="menu-text"><div class="menu-text-span"></div>{{language.menuGame}}</span></div>
 								<div class="menu-options-row-group"> 
 									<div class="menu-options-row">
@@ -62,7 +63,7 @@
 									</div>
 								</div>
 							</div>
-							<div class="menu-row">
+							<div class="menu-row menu-entering-collapsed">
 								<div class="menu-text"><div class="menu-text-span"></div>{{language.menuSets}}</span></div>
 								<div class="menu-options-row">
 									<div class="menu-inc-key" v-on:click="menuKeyClick('setMinus')">-</div>
@@ -70,7 +71,7 @@
 									<div class="menu-inc-key" v-on:click="menuKeyClick('setPlus')">+</div>
 								</div>
 							</div>
-							<div class="menu-row">
+							<div class="menu-row menu-entering-collapsed">
 								<div class="menu-text"><div class="menu-text-span"></div>{{language.menuLegs}}</span></div>
 								<div class="menu-options-row">
 									<div class="menu-inc-key" v-on:click="menuKeyClick('legMinus')">-</div>
@@ -78,10 +79,10 @@
 									<div class="menu-inc-key" v-on:click="menuKeyClick('legPlus')">+</div>
 								</div>
 							</div>
-							<div class="menu-row">
+							<div class="menu-row menu-entering-collapsed">
 								<div class="menu-key" v-on:click="newGame()">{{language.menuNewGame}}</div>
 							</div>
-							<div class="menu-row">
+							<div class="menu-row menu-entering-collapsed">
 									<div class="menu-key" v-on:click="menuShown = false">{{language.menuContinue}}</div>
 							</div>
 
@@ -134,7 +135,7 @@
 					</div>
 				</div>
 			</div>
-			<div id="scoring">
+			<div id="scoring" v-bind:class="{ 'menu-collapsed': menuShown }">
 				<div id="game-component">
 						<div class="scoring-data">
 							<div class="scoring-head">

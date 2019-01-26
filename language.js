@@ -1,8 +1,9 @@
 var languages = {
     "en": {
+        language: "English",
         menuNoStartSwap: "Maiden first",
         menuFirstPlayer: "First player: ",
-        menuSecondPlayer: "Second player",
+        menuSecondPlayer: "Second player: ",
         menuGame: "Game: ",
         menuSets: "Sets: ",
         menuLegs: "Legs: ",
@@ -16,9 +17,10 @@ var languages = {
         legs: "Legs",
     },
     "ru": {
+        language: "Русский",
         menuNoStartSwap: "Девушки начинают",
         menuFirstPlayer: "Первый игрок: ",
-        menuSecondPlayer: "Второй игрок",
+        menuSecondPlayer: "Второй игрок: ",
         menuGame: "Игра: ",
         menuSets: "Сетов: ",
         menuLegs: "Легов: ",

@@ -1,4 +1,10 @@
+@media only screen and (max-height: 400px) {
+
+}
 @media all and (orientation:landscape) {
+    .menu-entering-collapsed {
+        display: none;
+    }
     #dartsGame {
         width: 100%;
         display: flex;
