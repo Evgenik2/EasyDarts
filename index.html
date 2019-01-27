@@ -34,13 +34,37 @@
 				}
 			}
 		</script>
+		<style>
+			.menu-collapsed {
+				display: none;
+			}
+			.element-hidden {
+				visibility: hidden;
+			}
+			.element-collapsed {
+				display: none;
+			}
+		</style>
 	</head>
 	<body>
-		<div id="app">
-		  <div id="dartsGame">
+		<div id="app" class="app">
+		<div id="history" class="history" v-bind:class="{ 'menu-collapsed': !historyShown }">
+			<div class="history-container">
+				<div class="menu-key" v-on:click="historyShown = false">{{language.menuMenu}}</div>
+				<div class="history-data">
+					{{language.historyTotal}} {{history.length}}
+					<history-component  is="history-component" v-for="item in history" v-bind:item="item" v-bind:key="item.timeStamp"></history-component>
+				</div>
+			</div>
+		</div>
+
+		<div id="dartsGame" class="dartsGame" v-bind:class="{ 'menu-collapsed': historyShown }">
 			<div id="keyboard">
 				<div id="keyboard-keys">
 					<div id="keyboard-menu" class="keyboard-menu" v-bind:class="{ 'menu-collapsed': !menuShown }">
+							<div class="menu-row menu-entering-collapsed">
+								<div class="menu-key" v-on:click="showHistory()">{{language.menuHistory}}</div>
+							</div>
 							<div class="menu-row menu-entering-collapsed">
 								<div class="menu-maidenFirst" v-bind:class="{ 'menu-game-length-checked': newNoStartSwap }" v-on:click="menuKeyClick('noStartSwap')">{{language.menuNoStartSwap}}</div>
 								<div class="menu-inc-key" v-on:click="changeLanguage()">{{language.language}}</div>
@@ -135,7 +159,7 @@
 					</div>
 				</div>
 			</div>
-			<div id="scoring" v-bind:class="{ 'menu-collapsed': menuShown }">
+			<div id="scoring" class="scoring">
 				<div id="game-component">
 						<div class="scoring-data">
 							<div class="scoring-head">
@@ -178,6 +202,7 @@
 			var keyboardKeys;
 			
 			var game = {
+					timeStamp: new Date(),
 					player1: 'Player 1',
 					player2: 'Player 2',
 					setLength: 1,
@@ -215,6 +240,7 @@
 								return;
 							}
 							var g = JSON.parse(v);
+							game.timeStamp = g.timeStamp;
 							game.player1 = g.player1;
 							game.player2 = g.player2;
 							game.setLength = g.setLength;
@@ -365,7 +391,10 @@
 						game.updateAll();
 						var s = this.game[this.game.length - 1];
 						if(s.wonLegs1 >  Math.floor(this.legLength / 2) || s.wonLegs2 >  Math.floor(this.legLength / 2) || s.length >= this.legLength) {
-							if(this.game.length >= this.setLength || this.wonSets1 > Math.floor(this.setLength / 2) || this.wonSets2 > Math.floor(this.setLength / 2)) return;
+							if(this.game.length >= this.setLength || this.wonSets1 > Math.floor(this.setLength / 2) || this.wonSets2 > Math.floor(this.setLength / 2))  {
+								setRecord("History", this.timeStamp, JSON.stringify(this));
+								return;
+							}
 							this.game.push([]);
 						}
 						this.game[this.game.length - 1].push({ firstThrows: [], secondThrows: [] });
@@ -465,7 +494,7 @@
 					}
 				};
 			keyboardKeys = new Vue({
-				el: "#dartsGame",
+				el: "#app",
 				data: {
 					language: languages[settings.language],
 					languages: languages,
@@ -482,7 +511,10 @@
 					disabledCloses: 0,
 					minimumDoubles: 0,
 					menuShown: true,
+					historyShown: false,
 					stats: game.stats,
+					history: [],
+					historyItem: -1,
 					gameStat: { name: "Best of 1 sets of 5 legs", player1: "Player 1", player2: "Player 2" },
 					statsSetLeg: [
 						{ name: "Sets", player1: "0", player2: "0", width: 1 },
@@ -542,7 +574,20 @@
 						this.value = v;
 						this.legN = this.legs.length - 1;
 					},
+					showHistory: function() {
+						this.historyShown = true;
+						var to = new Date();
+						var from = new Date();
+						from.setDate(from.getDate() - 365);
+						getRecords("History", from, to, function(r) {
+							keyboardKeys.history = r.reverse();
+						});
+					},
+					showHistoryItem: function(t) {
+						historyItem = this.history.find((i) => { return i.timestamp == t});
+					},
 					newGame: function() {
+						game.timeStamp = new Date();
 						game.setLength = this.newSetLength;
 						game.legLength = this.newLegLength;
 						game.gameLength = this.newGameLength;
@@ -651,9 +696,11 @@
 			}
 			CreateObjectStore("Settings", function() {
 				CreateObjectStore("CurrentGame", function() {
-					game.restoreLastState();
-					settings.restore();
-					updateAll();
+					CreateObjectStore("History", function() {
+						game.restoreLastState();
+						settings.restore();
+						updateAll();
+					});
 				});
 			});
 

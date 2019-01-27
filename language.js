@@ -9,6 +9,9 @@ var languages = {
         menuLegs: "Legs: ",
         menuNewGame: "New Game",
         menuContinue: "Continue",
+        menuHistory: "History",
+        menuMenu: "Close",
+        histoyTotal: "Total: ",
         keyboardMenu: "M",
         keyboardOk: "Ok",
         set: "Set ",
@@ -18,7 +21,7 @@ var languages = {
     },
     "ru": {
         language: "Русский",
-        menuNoStartSwap: "Девушки начинают",
+        menuNoStartSwap: "Maiden first",
         menuFirstPlayer: "Первый игрок: ",
         menuSecondPlayer: "Второй игрок: ",
         menuGame: "Игра: ",
@@ -26,12 +29,15 @@ var languages = {
         menuLegs: "Легов: ",
         menuNewGame: "Новая игра",
         menuContinue: "Продолжить",
+        menuHistory: "История",
+        menuMenu: "Закрыть",
+        histoyTotal: "Всего: ",
         keyboardMenu: "М",
-        keyboardOk: "Да",
+        keyboardOk: "Ok",
         set: "Сет ",
         leg: "Лег ",
-        sets: "Сеты",
-        legs: "Леги",
+        sets: "Sets",
+        legs: "Legs",
     }
 
 };

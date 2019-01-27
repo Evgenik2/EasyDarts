@@ -63,6 +63,40 @@ function getRecord(tableName, key, f){
         }
     });
 }
+function formatDate(date) {
+    var d = new Date(date),
+        minute = '' + (d.getMinutes() + 1),
+        hour = '' + (d.getHours() + 1),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (minute.length < 2) minute = '0' + minute;
+    if (hour.length < 2) hour = '0' + hour;
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [year, month, day].join('-') + ' ' + hour + ':' + minute;
+}
+function getRecords(tableName, start, end, f) {
+    connectDB(tableName, function(db){
+        var rows = [];
+        var request = db.transaction([tableName], "readonly").objectStore(tableName).openCursor(IDBKeyRange.bound(start, end, true, false));
+        request.onerror = logerr;
+        request.onsuccess = function(e){
+            var cursor = e.target.result;
+            if(cursor) {
+                var r = JSON.parse(cursor.value.data);
+                r.startTime = formatDate(r.timeStamp);
+                rows = rows.concat(r);
+                cursor.continue();
+            }
+            else {
+                f(rows);
+            }
+        }
+    });
+}
 function setRecord(tableName, key, data) {
     connectDB(tableName, function(db) {
         var request = db.transaction([tableName], "readwrite").objectStore(tableName).put({ key: key, data: data });

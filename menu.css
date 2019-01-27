@@ -136,6 +136,37 @@
     justify-content: center;
     font-size: 6vmax;
 }
-.menu-collapsed {
-    display: none;
+.history {
+    flex: 1;
+    align-self: stretch;
+}
+.history-container {
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+}
+.history-item-container {
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+}
+.history-data {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-self: stretch;
+    color: #666666;
+    font-weight: 600;
+    font-size: 2vmax;
+}
+.history-item {
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+}
+.history-timeStamp {
+    font-size: 4vmax;
+    font-weight: 800;
+    color: #666666;
+    font-size: 2vmax;
 }

@@ -13,19 +13,19 @@ self.addEventListener('install', e => {
               '/favicon.ico',
               '/icon.png',
               '/index.html',
-              'indexedDB.js',
-              'language.js',
-              'media.css',
-              'menu.css',
-              'mstile-150x150.png',
-              'safari-pinned-tab.svg',
-              'settings.js',
-              'site.manifest',
-              'styles.css',
-              'sw.js',
-              'swipe.js',
+              '/indexedDB.js',
+              '/language.js',
+              '/media.css',
+              '/menu.css',
+              '/mstile-150x150.png',
+              '/safari-pinned-tab.svg',
+              '/settings.js',
+              '/site.manifest',
+              '/styles.css',
+              '/sw.js',
+              '/swipe.js',
               '/vue.js',
-              'vueCommands.js'
+              '/vueCommands.js'
             ]);
         })
     );
