@@ -9,7 +9,7 @@ var settings = {
         var e = endings[this.endings]; 
         if(e[value] == undefined)
             return defaultValue;
-        return value;
+        return e[value];
     },
     store: function() {
         setRecord("Settings", "settings", JSON.stringify(this));

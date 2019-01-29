@@ -1,3 +1,58 @@
+Vue.directive('longpress', {
+    bind: function (el, binding, vNode) {
+        // Make sure expression provided is a function
+        if (typeof binding.value !== 'function') {
+            // Fetch name of component
+            const compName = vNode.context.name;
+            // pass warning to console
+            let warn = `[longpress:] provided expression '${binding.expression}' is not a function, but has to be`
+            if (compName) { warn += `Found in component '${compName}' ` }
+
+            console.warn(warn);
+        }
+
+        // Define variable
+        let pressTimer = null
+
+        // Define funtion handlers
+        // Create timeout ( run function after 1s )
+        let start = (e) => {
+
+            if (e.type === 'click' && e.button !== 0) {
+                return;
+            }
+
+            if (pressTimer === null) {
+                pressTimer = setTimeout(() => {
+                    // Run function
+                    handler()
+                }, 1000)
+            }
+        }
+
+        // Cancel Timeout
+        let cancel = (e) => {
+            // Check if timer has a value or not
+            if (pressTimer !== null) {
+                clearTimeout(pressTimer)
+                pressTimer = null;
+            }
+        }
+        // Run Function
+        const handler = (e) => {
+            binding.value(e);
+        }
+
+        // Add Event listeners
+        el.addEventListener("mousedown", start);
+        el.addEventListener("touchstart", start);
+        // Cancel timeouts if this events happen
+        el.addEventListener("click", cancel);
+        el.addEventListener("mouseout", cancel);
+        el.addEventListener("touchend", cancel);
+        el.addEventListener("touchcancel", cancel);
+    }
+});
 Vue.component("stats-component", {
     template: `
         <div class="stat-item"> 
@@ -38,7 +93,7 @@ Vue.component("game-leg-component", {
 });
 Vue.component("history-component", {
     template: `
-        <div class="history-item" v-on:click="showHistoryItem()"> 
+        <div class="history-item" v-on:click="showHistoryItem(item.timeStamp)"> 
             <div class="history-timeStamp">{{item.startTime}}</div>
             <div class="scoring-row">
                 <div class="stat-game-way-player"> 
@@ -101,5 +156,37 @@ Vue.component("history-component", {
     `,
     props: {
         item: Object
+    },
+    methods: {
+        showHistoryItem: function(timestamp) {
+            keyboardKeys.showHistoryItem(timestamp);
+        }
+    }
+});
+Vue.component("game-set-component", {
+    template: `
+        <div class="scoring-data">
+            <div class="scoring-head">
+                <div class="scoring-player">{{item.player1}}</div>
+                <div class="scoring-leg-group">
+                    <div class="scoring-leg">
+                        Set {{item.set + 1}}
+                    </div>
+                    <div class="scoring-leg-separator"></div>
+                    <div class="scoring-leg">
+                        Leg {{item.leg + 1}}
+                    </div>
+                </div>
+                <div class="scoring-player">{{item.player2}}</div>
+            </div>
+            <div id="scoring-throws">
+                <game-leg-component is="game-leg-component" v-for="item in item.throws" v-bind:item="item" v-bind:key="item.name">
+                </game-leg-component>
+            </div>
+        </div>
+    `,
+    props: {
+        item: Object,
+        language: languages[settings.language]
     }
 });
