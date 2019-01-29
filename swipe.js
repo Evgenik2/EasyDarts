@@ -168,8 +168,8 @@ Vue.directive('swipe', {
         if ((support.pointer && !support.touch) || events.type === "mouse") isMouse = true;
 
         // добавление обработчиков на элемент
-        el.addEventListener("touchstart", checkStart);
-        el.addEventListener("touchmove", checkMove);
-        el.addEventListener("touchend", checkEnd);
+        el.addEventListener("touchstart", checkStart, { passive: false });
+        el.addEventListener("touchmove", checkMove, { passive: false });
+        el.addEventListener("touchend", checkEnd, { passive: false });
     }
 });
