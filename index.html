@@ -293,7 +293,7 @@
 							{ name: "Best", player1: 0, player2: 0 },
 							{ name: "LWAT", player1: 0, player2: 0 },
 						];
-						var fThrow = 0, fTotal = 0, fDbl = 0, fCl = 0, fBst = 0, fLwat = 0;
+						var fThrow = 0, fTotal = 0, fDbl = 0, fCl = 0, fBst = 10000, fLwat = 0;
 						for(var i = 0; i < this.game.length; i++)
 							for(var j = 0; j < this.game[i].length; j++) {
 								var l = this.game[i][j];
@@ -319,14 +319,14 @@
 
 								});
 								if(fc > 0)
-									fBst = Math.max(fBst, (l.firstThrows.length - 1) * 3 + fc);
+									fBst = Math.min(fBst, (l.firstThrows.length - 1) * 3 + fc);
 							}
 						this.stats[3].player1 = fThrow > 0 ? Math.round(fTotal / fThrow) : 0;
 						this.stats[5].player1 = fCl + "/" + Math.round(fDbl);
 						this.stats[6].player1 = fDbl > 0 ? Math.round(fCl / fDbl * 100) : 0;
-						this.stats[7].player1 = fBst;
+						this.stats[7].player1 = fBst == 10000 ? 0 : fBst;
 						this.stats[8].player1 = fLwat;
-						var sThrow = 0, sTotal = 0, sDbl = 0, sCl = 0, sBst = 0, sLwat = 0;
+						var sThrow = 0, sTotal = 0, sDbl = 0, sCl = 0, sBst = 10000, sLwat = 0;
 						for(var i = 0; i < this.game.length; i++)
 							for(var j = 0; j < this.game[i].length; j++) {
 								var l = this.game[i][j];
@@ -351,12 +351,12 @@
 									}
 								});
 								if(sc > 0)
-									sBst = Math.max(sBst, (l.secondThrows.length - 1) * 3 + sc);
+									sBst = Math.min(sBst, (l.secondThrows.length - 1) * 3 + sc);
 							}
 							this.stats[3].player2 = sThrow > 0 ? Math.round(sTotal / sThrow) : 0;
 							this.stats[5].player2 = sCl + "/" + Math.round(sDbl);
 							this.stats[6].player2 = sDbl > 0 ? Math.round(sCl / sDbl * 100) : 0;
-							this.stats[7].player2 = sBst;
+							this.stats[7].player2 = sBst == 10000 ? 0 : sBst;
 							this.stats[8].player2 = sLwat;							
 						keyboardKeys.stats = this.stats;
 					},
