@@ -10,18 +10,12 @@ Vue.directive('swipe', {
 
             console.warn(warn);
         }
-        var settings = {
+        let settings = {
                 minDist: 60,
                 maxDist: 120,
                 maxTime: 700,
                 minTime: 50
             };
-        // коррекция времени при ошибочных значениях
-        if (settings.maxTime < settings.minTime) settings.maxTime = settings.minTime + 500;
-        if (settings.maxTime < 100 || settings.minTime < 50) {
-            settings.maxTime = 700;
-            settings.minTime = 50;
-        }
 
         var dir,                  // направление свайпа (horizontal, vertical)
             swipeType,            // тип свайпа (up, down, left, right)
@@ -35,7 +29,7 @@ Vue.directive('swipe', {
             startTime = 0,        // время начала касания
             support = {           // поддерживаемые браузером типы событий
                 pointer: !!("PointerEvent" in window || ("msPointerEnabled" in window.navigator)),
-                touch: !!(typeof window.orientation !== "undefined" || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || "ontouchstart" in window || navigator.msMaxTouchPoints || "maxTouchPoints" in window.navigator > 1 || "msMaxTouchPoints" in window.navigator > 1)
+                touch: true
             };
 
         /**
@@ -44,40 +38,40 @@ Vue.directive('swipe', {
          */
         var getSupportedEvents = function() {
             switch (true) {
-            case support.pointer:
-                events = {
-                type:   "pointer",
-                start:  "PointerDown",
-                move:   "PointerMove",
-                end:    "PointerUp",
-                cancel: "PointerCancel",
-                leave:  "PointerLeave"
-                };
-                // добавление префиксов для IE10
-                var ie10 = (window.navigator.msPointerEnabled && Function('/*@cc_on return document.documentMode===10@*/')());
-                for (var value in events) {
-                if (value === "type") continue;
-                events[value] = (ie10) ? "MS" + events[value] : events[value].toLowerCase();
-                }
-                break;
-            case support.touch:
-                events = {
-                type:   "touch",
-                start:  "touchstart",
-                move:   "touchmove",
-                end:    "touchend",
-                cancel: "touchcancel"
-                };
-                break;
-            default:
-                events = {
-                type:  "mouse",
-                start: "mousedown",
-                move:  "mousemove",
-                end:   "mouseup",
-                leave: "mouseleave"
-                };
-                break;
+                case support.pointer:
+                    events = {
+                        type:   "pointer",
+                        start:  "PointerDown",
+                        move:   "PointerMove",
+                        end:    "PointerUp",
+                        cancel: "PointerCancel",
+                        leave:  "PointerLeave"
+                    };
+                    // добавление префиксов для IE10
+                    var ie10 = (window.navigator.msPointerEnabled && Function('/*@cc_on return document.documentMode===10@*/')());
+                    for (var value in events) {
+                    if (value === "type") continue;
+                    events[value] = (ie10) ? "MS" + events[value] : events[value].toLowerCase();
+                    }
+                    break;
+                case support.touch:
+                    events = {
+                        type:   "touch",
+                        start:  "touchstart",
+                        move:   "touchmove",
+                        end:    "touchend",
+                        cancel: "touchcancel"
+                    };
+                    break;
+                default:
+                    events = {
+                        type:  "mouse",
+                        start: "mousedown",
+                        move:  "mousemove",
+                        end:   "mouseup",
+                        leave: "mouseleave"
+                    };
+                    break;
             }
             return events;
         };
@@ -130,8 +124,8 @@ Vue.directive('swipe', {
          */
         var checkEnd = function(e) {
             if (isMouse && !isMouseDown) { // выход из функции и сброс проверки нажатия мыши
-            mouseDown = false;
-            return;
+                mouseDown = false;
+               return;
             }
             var endTime = new Date().getTime();
             var time = endTime - startTime;

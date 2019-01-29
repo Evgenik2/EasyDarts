@@ -122,7 +122,7 @@
 							</div>
 
 					</div>
-					<div id="keyboard-numbers" class="keyboard-numbers" v-bind:class="{ 'element-collapsed': menuShown }" v-swipe="swipeKeys">
+					<div id="keyboard-numbers" class="keyboard-numbers" v-bind:class="{ 'element-collapsed': menuShown }" v-swipe="showMenu">
 						<div class="keyboard-row">
 							<div class="regular-key" id="key1" v-on:click="keyboardClick(1)"> 1 </div>
 							<div class="regular-key" id="key2" v-on:click="keyboardClick(2)"> 2 </div>
@@ -139,9 +139,9 @@
 							<div class="regular-key" id="key9" v-on:click="keyboardClick(9)"> 9 </div>
 						</div>
 						<div class="keyboard-row">
-							<div class="regular-key" id="keyC" v-on:click="menuShown = true"> M </div>
+							<div class="regular-key" id="keyC" v-on:click="showMenu"> M </div>
 							<div class="regular-key" id="key0" v-on:click="keyboardClick(0)"> 0 </div>
-							<div class="regular-key" id="keyD" v-on:click="keyboardDelete"> &#11013 </div>
+							<div class="regular-key" id="keyD" v-on:click="keyboardDelete"> ↩ </div>
 						</div>
 					</div>
 					<div id="keyboard-score" class="keyboard-score" v-bind:class="{ 'element-collapsed': menuShown }">
@@ -172,7 +172,7 @@
 			</div>
 			<div id="scoring" class="scoring">
 				<div id="game-component">
-						<div class="scoring-data" v-swipe="swipeLeg">
+						<div id="scoring-data" class="scoring-data" v-swipe="swipeLeg">
 							<div class="scoring-head">
 								<div class="scoring-player" v-on:click="prev">{{legs[legN].player1}}</div>
 								<div class="scoring-leg" v-bind:class="{ 'element-collapsed': showSeparator }">
@@ -297,6 +297,7 @@
 						for(var i = 0; i < this.game.length; i++)
 							for(var j = 0; j < this.game[i].length; j++) {
 								var l = this.game[i][j];
+								var fc = 0;
 								l.firstThrows.forEach((v) => {
 									var vv = v % 1000;
 									if(vv == 180) this.stats[2].player1 += 1;
@@ -306,27 +307,30 @@
 									fTotal += vv;
 									if(v > 10000) {
 										this.stats[4].player1 = Math.max(this.stats[0].player1, vv);
-										fBst = Math.max(fBst, vv);
 									}
 									if(v > 1000)
 										fDbl += Math.floor(v % 10000 / 1000);
 									if(v > 10000) {
+										fc = Math.floor(v / 10000);
 										fCl += 1;
 										if(!this.isFirstStart(i, j))
 											fLwat += 1;
 									}
 
 								});
-								this.stats[3].player1 = fThrow > 0 ? Math.round(fTotal / fThrow) : 0;
-								this.stats[5].player1 = fCl + "/" + Math.round(fDbl);
-								this.stats[6].player1 = fDbl > 0 ? Math.round(fCl / fDbl * 100) : 0;
-								this.stats[7].player1 = fBst;
-								this.stats[8].player1 = fLwat;
+								if(fc > 0)
+									fBst = Math.max(fBst, (l.firstThrows.length - 1) * 3 + fc);
 							}
+						this.stats[3].player1 = fThrow > 0 ? Math.round(fTotal / fThrow) : 0;
+						this.stats[5].player1 = fCl + "/" + Math.round(fDbl);
+						this.stats[6].player1 = fDbl > 0 ? Math.round(fCl / fDbl * 100) : 0;
+						this.stats[7].player1 = fBst;
+						this.stats[8].player1 = fLwat;
 						var sThrow = 0, sTotal = 0, sDbl = 0, sCl = 0, sBst = 0, sLwat = 0;
 						for(var i = 0; i < this.game.length; i++)
 							for(var j = 0; j < this.game[i].length; j++) {
 								var l = this.game[i][j];
+								var sc = 0;
 								l.secondThrows.forEach((v) => {
 									var vv =  v % 1000;
 									if(vv == 180) this.stats[2].player2+=1;
@@ -336,22 +340,24 @@
 									sTotal += vv;
 									if(v > 10000) {
 										this.stats[4].player2 = Math.max(this.stats[0].player2, vv);
-										sBst = Math.max(sBst, vv);
 									}
 									if(v > 1000)
 										sDbl += Math.floor(v % 10000 / 1000);
 									if(v > 10000) {
+										sc = Math.floor(v / 10000);
 										sCl += 1;
 										if(this.isFirstStart(i, j))
 											sLwat += 1;
 									}
 								});
-								this.stats[3].player2 = sThrow > 0 ? Math.round(sTotal / sThrow) : 0;
-								this.stats[5].player2 = sCl + "/" + Math.round(sDbl);
-								this.stats[6].player2 = sDbl > 0 ? Math.round(sCl / sDbl * 100) : 0;
-								this.stats[7].player2 = sBst;
-								this.stats[8].player2 = sLwat;
+								if(sc > 0)
+									sBst = Math.max(sBst, (l.secondThrows.length - 1) * 3 + sc);
 							}
+							this.stats[3].player2 = sThrow > 0 ? Math.round(sTotal / sThrow) : 0;
+							this.stats[5].player2 = sCl + "/" + Math.round(sDbl);
+							this.stats[6].player2 = sDbl > 0 ? Math.round(sCl / sDbl * 100) : 0;
+							this.stats[7].player2 = sBst;
+							this.stats[8].player2 = sLwat;							
 						keyboardKeys.stats = this.stats;
 					},
 					updateAll: function() {
@@ -586,11 +592,25 @@
 						this.legN--;
 						if(this.legN < 0)
 							this.legN = 0;
+						else {
+							var elm = document.getElementById("scoring-data");
+							elm.classList.remove("animSwipeRight");
+							elm.classList.remove("animSwipeLeft");
+							void elm.offsetWidth;
+							elm.classList.add("animSwipeRight");
+						}
 					},
 					next: function() {
 						this.legN++;
 						if(this.legN >= this.legs.length)
 							this.legN = this.legs.length - 1;
+						else {
+							var elm = document.getElementById("scoring-data");
+							elm.classList.remove("animSwipeLeft");
+							elm.classList.remove("animSwipeRight");
+							void elm.offsetWidth;
+							elm.classList.add("animSwipeLeft");
+						}
 					},
 					swipeLeg: function(e) {
 						if(e.detail.dir == "right")
@@ -598,8 +618,10 @@
 						if(e.detail.dir == "left")
 							this.next();
 					},
-					swipeKeys: function() {
+					showMenu: function() {
 						this.menuShown = true;
+						var elm = document.getElementById("keyScore");
+						elm.classList.remove("animError");
 					},
 					keyboardClick: function (value) {
 						var v = this.value * 10 + value;
@@ -637,6 +659,9 @@
 						getRecords("History", from, to, function(r) {
 							keyboardKeys.history = r.reverse();
 						});
+						var elm = document.getElementById("scoring-data");
+						elm.classList.remove("animSwipeRight");
+						elm.classList.remove("animSwipeLeft");
 					},
 					showHistoryItem: function(t) {
 						this.currentView = 2;
@@ -694,15 +719,19 @@
 						if(this.closes > 0)
 							this.doubles = Math.max(this.doubles, 1);
 					},
+					showError: function() {
+						var elm = document.getElementById("keyScore");
+						elm.classList.remove("animError");
+						void elm.offsetWidth;
+						elm.classList.add("animError");
+					},
 					keyboardLongOk() {
-						if(game.lastLeg.throws.next == 0) return;
+						if(game.lastLeg.next == 0) return;
 						var left = game.lastLeg.next == 1 ? game.lastLeg.left1 : game.lastLeg.left2;
 						var v = left - this.value;
 						this.value = v;
-						if(validateThrow(this.value, left))
-							keyboardOk();
-						else {
-							//document.getElementById("keyOk").classList.add("anim");
+						if(!validateThrow(this.value, left)) {
+							this.showError();
 							game.updateAll();
 							this.game = game;
 							this.value = 0;
@@ -720,11 +749,11 @@
 								game.newLeg();
 							}
 						} else {
-						if(game.lastLeg.throws.next == 0) return;
-							if(validateThrow(this.value, game.lastLeg.throws.next == 1 ? game.lastLeg.left1 : game.lastLeg.left2))
+							if(game.lastLeg.next == 0) return;
+							if(validateThrow(this.value, game.lastLeg.next == 1 ? game.lastLeg.left1 : game.lastLeg.left2))
 								game.nextThrow(this.doubles * 1000 + this.value);
 							else {
-								//document.getElementById("keyOk").classList.add("anim");
+								this.showError();
 							}
 						}
 						game.updateAll();

@@ -139,6 +139,7 @@
 .history {
     flex: 1;
     align-self: stretch;
+    font-size: 1.8vmax;
 }
 .history-container {
     display: flex;

@@ -11,7 +11,9 @@ html, body {
     display: flex;
     height: 100%;
 }
-
+body::-webkit-scrollbar {
+    display: none;
+}
 .scoring {
     display: flex;
     flex: 1;
@@ -263,7 +265,7 @@ html, body {
 .keyboard-stats {
     flex-direction: row;
     margin: 0.2vmax;
-    font-size: 2vmax;
+    font-size: 1.8vmax;
 }
 .keyboard-stats-list {
     display: flex;
@@ -344,7 +346,7 @@ html, body {
     opacity: 0;
   }
 
-  @keyframes ft {
+  @keyframes kfError {
     from {
         background: white;
     }
@@ -352,6 +354,41 @@ html, body {
         background: red;
     }
   }
-  .anim {
-    animation: ft 2s alternate;
+  .animError {
+    animation: kfError 0.1s alternate 5;
+  }
+
+  @keyframes kfSwipeRight {
+    0% {
+        transform: translateX(0%);
+        opacity: 1;
+    }
+    50% {
+        transform: translateX(50%);
+        opacity: 0;
+    }
+    51% {
+        transform: translateX(-50%);
+        opacity: 0;
+    }
+  }
+  .animSwipeRight {
+    animation: kfSwipeRight 0.3s;
+  }
+  @keyframes kfSwipeLeft {
+    0% {
+        transform: translateX(0%);
+        opacity: 1;
+    }
+    50% {
+        transform: translateX(-50%);
+        opacity: 0;
+    }
+    51% {
+        transform: translateX(50%);
+        opacity: 0;
+    }
+  }
+  .animSwipeLeft {
+    animation: kfSwipeLeft 0.3s;
   }
