@@ -25,8 +25,9 @@
 		<link href="media.css" rel="stylesheet" type="text/css" />
 		<script>
 			function registerServiceWorker() {
+				var root = "/EasyDarts/";
 				if ('serviceWorker' in navigator) {
-					navigator.serviceWorker.register('sw.js', { scope: '/EasyDarts/' }).then(() => {
+					navigator.serviceWorker.register('sw.js', { scope: root }).then(() => {
 						console.log('Service Worker registered successfully.');
 					}).catch(error => {
 						console.log('Service Worker registration failed:', error);
