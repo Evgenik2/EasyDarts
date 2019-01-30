@@ -212,6 +212,9 @@ body::-webkit-scrollbar {
 }
 .scoring-player {
     display: flex;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow-x: hidden;
     flex: 2;
     background: #888888;
     color: white;
