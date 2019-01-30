@@ -616,10 +616,17 @@
 						}
 					},
 					swipeLeg: function(e) {
-						if(e.detail.dir == "right")
-							this.prev();
-						if(e.detail.dir == "left")
-							this.next();
+						if(e.detail.moving) {
+							if(e.detail.dir == "up")
+								document.getElementById("scoring-throws").scrollTop += e.detail.dist;
+							if(e.detail.dir == "down")
+								document.getElementById("scoring-throws").scrollTop -= e.detail.dist;
+						} else {
+							if(e.detail.dir == "right")
+								this.prev();
+							if(e.detail.dir == "left")
+								this.next();
+						}
 					},
 					showMenu: function() {
 						this.menuShown = true;

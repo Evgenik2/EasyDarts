@@ -121,6 +121,19 @@ Vue.directive('swipe', {
             distY = event.pageY - startY;
             if (Math.abs(distX) > Math.abs(distY)) dir = (distX < 0) ? "left" : "right";
             else dir = (distY < 0) ? "up" : "down";
+            dist = (dir === "left" || dir === "right") ? Math.abs(distX) : Math.abs(distY); // опредление пройденной указателем дистанции
+            var swipeEvent = new CustomEvent("swipe", {
+                bubbles: true,
+                cancelable: true,
+                detail: {
+                    full: e, // полное событие Event
+                    moving: true,
+                    dir:  swipeType, // направление свайпа
+                    dist: dist, // дистанция свайпа
+                    time: time // время, потраченное на свайп
+                }
+            });
+            binding.value(swipeEvent);
             //e.preventDefault();
         };
 
