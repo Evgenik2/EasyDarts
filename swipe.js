@@ -107,7 +107,7 @@ Vue.directive('swipe', {
             startY = event.pageY;
             startTime = new Date().getTime();
             if (isMouse) isMouseDown = true; // поддержка мыши
-            e.preventDefault();
+            //e.preventDefault();
         };
 
         /**
@@ -121,7 +121,7 @@ Vue.directive('swipe', {
             distY = event.pageY - startY;
             if (Math.abs(distX) > Math.abs(distY)) dir = (distX < 0) ? "left" : "right";
             else dir = (distY < 0) ? "up" : "down";
-            e.preventDefault();
+            //e.preventDefault();
         };
 
         /**
@@ -130,8 +130,8 @@ Vue.directive('swipe', {
          */
         var checkEnd = function(e) {
             if (isMouse && !isMouseDown) { // выход из функции и сброс проверки нажатия мыши
-            mouseDown = false;
-            return;
+                mouseDown = false;
+                return;
             }
             var endTime = new Date().getTime();
             var time = endTime - startTime;
@@ -158,7 +158,7 @@ Vue.directive('swipe', {
                 });
                 binding.value(swipeEvent);
             }
-            e.preventDefault();
+            //e.preventDefault();
         };
 
         // добавление поддерживаемых событий

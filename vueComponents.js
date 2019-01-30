@@ -44,13 +44,13 @@ Vue.directive('longpress', {
         }
 
         // Add Event listeners
-        el.addEventListener("mousedown", start);
-        el.addEventListener("touchstart", start);
+        el.addEventListener("mousedown", start, { passive: false });
+        el.addEventListener("touchstart", start, { passive: false });
         // Cancel timeouts if this events happen
-        el.addEventListener("click", cancel);
-        el.addEventListener("mouseout", cancel);
-        el.addEventListener("touchend", cancel);
-        el.addEventListener("touchcancel", cancel);
+        el.addEventListener("click", cancel, { passive: false });
+        el.addEventListener("mouseout", cancel, { passive: false });
+        el.addEventListener("touchend", cancel, { passive: false });
+        el.addEventListener("touchcancel", cancel, { passive: false });
     }
 });
 Vue.component("stats-component", {
