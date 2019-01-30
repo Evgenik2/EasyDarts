@@ -179,7 +179,7 @@ Vue.component("game-set-component", {
                 </div>
                 <div class="scoring-player">{{item.player2}}</div>
             </div>
-            <div id="scoring-throws">
+            <div id="scoring-throws-group">
                 <game-leg-component is="game-leg-component" v-for="item in item.throws" v-bind:item="item" v-bind:key="item.name">
                 </game-leg-component>
             </div>

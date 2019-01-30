@@ -85,11 +85,11 @@
 							</div>
 							<div class="menu-row">
 								<div class="menu-text"><div class="menu-text-span">{{language.menuFirstPlayer}}</div></div>
-								<input class="menu-input" v-model="game.player1" id="player1" name="player1"/>
+								<input class="menu-input" maxlength="20" v-model="game.player1" id="player1" name="player1"/>
 							</div>
 							<div class="menu-row">
 								<div class="menu-text"><div class="menu-text-span"></div>{{language.menuSecondPlayer}}</span></div>
-								<input class="menu-input" v-model="game.player2" id="player1" name="player1"/>
+								<input class="menu-input" maxlength="20" v-model="game.player2" id="player1" name="player1"/>
 							</div>
 							<div class="menu-row menu-entering-collapsed">
 								<div class="menu-text"><div class="menu-text-span"></div>{{language.menuGame}}</span></div>
@@ -175,7 +175,7 @@
 			</div>
 			<div id="scoring" class="scoring">
 				<div id="game-component">
-						<div id="scoring-data" class="scoring-data" v-swipe="swipeLeg">
+						<div id="scoring-data" class="scoring-data"> <!-- v-swipe="swipeLeg"-->
 							<div class="scoring-head">
 								<div class="scoring-player" v-on:click="prev">{{legs[legN].player1}}</div>
 								<div class="scoring-leg" v-bind:class="{ 'element-collapsed': showSeparator }">
