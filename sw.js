@@ -2,7 +2,7 @@ self.addEventListener('install', e => {
     self.skipWaiting(); 
     e.waitUntil(
         caches.open('easyDarts-cache').then(cache => {
-            var root = "/";
+            var root = "/EasyDarts/";
             return cache.addAll([
               root + '',
               root + 'index.html',
