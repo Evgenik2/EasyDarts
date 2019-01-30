@@ -192,6 +192,7 @@ body::-webkit-scrollbar {
 }
 .scoring-throws-space {
     flex: 1;
+    height: 2vmax;
 }
 #game-component {
     display: flex;
