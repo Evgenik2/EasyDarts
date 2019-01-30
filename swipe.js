@@ -107,7 +107,7 @@ Vue.directive('swipe', {
             startY = event.pageY;
             startTime = new Date().getTime();
             if (isMouse) isMouseDown = true; // поддержка мыши
-            //e.preventDefault();
+            e.preventDefault();
         };
 
         /**
@@ -133,7 +133,7 @@ Vue.directive('swipe', {
                 }
             });
             binding.value(swipeEvent);
-            //e.preventDefault();
+            e.preventDefault();
         };
 
         /**
@@ -170,7 +170,7 @@ Vue.directive('swipe', {
                 });
                 binding.value(swipeEvent);
             }
-            //e.preventDefault();
+            e.preventDefault();
         };
 
         // добавление поддерживаемых событий

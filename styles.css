@@ -324,8 +324,11 @@ body::-webkit-scrollbar {
     padding: 0.5vmax;
 }
 .stat-game-way-head {
-    flex: 1;
     display: flex;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow-x: hidden;
+    flex: 1;
     background: #449def;
     color: white;
     justify-content: center;
@@ -342,6 +345,9 @@ body::-webkit-scrollbar {
 }
 .stat-game-way-player {
     display: flex;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow-x: hidden;
     flex-direction: column;
     flex: 6;
     margin-bottom: 0.2vmax;
