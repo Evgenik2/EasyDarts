@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<section id="installBanner" class="banner">
-			<button id="installBtn">Install app</button>
-		</section>
 		<meta charset="utf-8">
 		<meta name="Description" content="The darts calculator.">
 		<title>Easy Darts 2.0</title>
@@ -53,6 +50,9 @@
 		</style>
 	</head>
 	<body>
+		<section id="installBanner" class="banner">
+			<button id="installBtn">Install app</button>
+		</section>
 		<div id="app" class="app">
 		<div id="history" class="history" v-bind:class="{ 'menu-collapsed': currentView != 1 }">
 			<div class="history-container">
