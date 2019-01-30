@@ -815,7 +815,13 @@
 					});
 				});
 			});
-
+			var app = document.getElementById("app");
+			app.addEventListener('touchend', function(e) {
+				e.preventDefault();
+				// Add your code here. 
+				app.click();
+				// This line still calls the standard click event, in case the user needs to interact with the element that is being clicked on, but still avoids zooming in cases of double clicking.
+			}, { passive: false });
 		</script>
 	</body>
 </html>
