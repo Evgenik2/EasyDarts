@@ -1,7 +1,8 @@
 self.addEventListener('install', e => {
+    self.skipWaiting(); 
     e.waitUntil(
         caches.open('easyDarts-cache').then(cache => {
-            var root = "/EasyDarts/";
+            var root = "/";
             return cache.addAll([
               root + '',
               root + 'index.html',
@@ -21,12 +22,12 @@ self.addEventListener('install', e => {
               root + 'mstile-150x150.png',
               root + 'safari-pinned-tab.svg',
               root + 'settings.js',
-              root + 'site.manifest',
+              root + 'site.webmanifest',
               root + 'styles.css',
               root + 'sw.js',
               root + 'swipe.js',
               root + 'vue.js',
-              root + 'vueCommands.js'
+              root + 'vueComponents.js'
             ]);
         })
     );
