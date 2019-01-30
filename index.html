@@ -269,7 +269,7 @@
 								return;
 							}
 							var g = JSON.parse(v);
-							game.timeStamp = g.timeStamp;
+							game.timeStamp = new Date(g.timeStamp);
 							game.player1 = g.player1;
 							game.player2 = g.player2;
 							game.setLength = g.setLength;
