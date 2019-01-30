@@ -179,10 +179,19 @@ body::-webkit-scrollbar {
     flex-direction: column;
 }
 #scoring-throws {
+    flex: 6;    
     overflow-y: auto;
+    flex-basis: 0;
 }
 #scoring-throws::-webkit-scrollbar {
     display: none;
+}
+.scoring-throws-group {
+    display: flex;
+    flex-direction: row;
+}
+.scoring-throws-space {
+    flex: 1;
 }
 #game-component {
     display: flex;

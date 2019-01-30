@@ -193,8 +193,11 @@
 								<div class="scoring-player" v-on:click="next">{{legs[legN].player2}}</div>
 							</div>
 							<div id="scoring-throws">
-								<game-leg-component is="game-leg-component" v-for="item in legs[legN].throws" v-bind:item="item" v-bind:key="item.name">
-								</game-leg-component>
+								<div id="scoring-throws-group">
+									<game-leg-component is="game-leg-component" v-for="item in legs[legN].throws" v-bind:item="item" v-bind:key="item.name">
+									</game-leg-component>
+									<div class="scoring-throws-space"></div>
+								</div>
 							</div>
 						</div>
 				</div>

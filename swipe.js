@@ -129,8 +129,7 @@ Vue.directive('swipe', {
                     full: e, // полное событие Event
                     moving: true,
                     dir:  swipeType, // направление свайпа
-                    dist: dist, // дистанция свайпа
-                    time: time // время, потраченное на свайп
+                    dist: dist // дистанция свайпа
                 }
             });
             binding.value(swipeEvent);
