@@ -27,7 +27,7 @@ self.addEventListener('install', e => {
               root + 'styles.css',
               root + 'sw.js',
               root + 'swipe.js',
-              root + 'vue.js',
+              root + 'vue.min.js',
               root + 'vueComponents.js'
             ]);
         })
@@ -36,14 +36,34 @@ self.addEventListener('install', e => {
 
 self.addEventListener('fetch', function(event) {
   console.log(event.request.url);
-  event.respondWith(fromCache(event.request));
-  event.waitUntil(update(event.request));
+  event.respondWith(fromNetwork(event.request, 400).catch(function () {
+    return fromCache(event.request);
+  }));
 });
 function fromCache(request) {
   return caches.open(cacheName).then(function (cache) {
     return cache.match(request).then(function (matching) {
-      return matching || fetch(request);
+      if(matching)
+        return matching;
+      return fetch(request).then(function (response) {
+        cache.put(request, response.clone()).then(function() {
+          return response;
+        });
+      });
     });
+  });
+}
+function fromNetwork(request, timeout) {
+  return new Promise(function (fulfill, reject) {
+    var timeoutId = setTimeout(reject, timeout);
+    fetch(request).then(function (response) {
+      clearTimeout(timeoutId);
+      caches.open(cacheName).then(function (cache) {
+        cache.put(request, response.clone()).then(function() {
+          fulfill(response);
+        });
+      });
+    }, reject);
   });
 }
 function update(request) {
