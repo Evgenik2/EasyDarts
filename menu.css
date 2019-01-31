@@ -13,6 +13,11 @@
     color: #666666;
     font-size: 2vmax;
 }
+.menu-text-ver {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+}
 .menu-text-span {
     display: inline-block;
     vertical-align: middle;
