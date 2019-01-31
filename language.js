@@ -18,6 +18,8 @@ var languages = {
         leg: "Leg ",
         sets: "Sets",
         legs: "Legs",
+        bannerInstall: "Istall Application",
+        bannerDescription: "Add the Easy Darts application to your home screen."
     },
     "ru": {
         language: "Русский",
@@ -38,6 +40,8 @@ var languages = {
         leg: "Лег ",
         sets: "Sets",
         legs: "Legs",
+        bannerInstall: "Установить приложение",
+        bannerDescription: "Добавить приложение Easy Darts на рабочий стол"
     }
 
 };

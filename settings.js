@@ -22,6 +22,7 @@ var settings = {
                 var r = JSON.parse(data);
                 settings.endings = r.endings == undefined ? "Default" : r.endings;
                 settings.language = r.language == undefined ? "en" : r.language;
+                banner.language = languages[settings.language];
                 keyboardKeys.newSetLength = settings.newSetLength = r.newSetLength;
                 keyboardKeys.newLegLength = settings.newLegLength = r.newLegLength;
                 keyboardKeys.newGameLength = settings.newGameLength = r.newGameLength;

@@ -355,29 +355,27 @@ body::-webkit-scrollbar {
 
 .slide-fade-enter-active {
     transition: all .3s ease;
-  }
-  .slide-fade-leave-active {
+}
+.slide-fade-leave-active {
     transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-  }
-  .slide-fade-enter, .slide-fade-leave-to
-  /* .slide-fade-leave-active до версии 2.1.8 */ {
+}
+.slide-fade-enter, .slide-fade-leave-to {
     transform: translateX(10px);
     opacity: 0;
-  }
-
-  @keyframes kfError {
+}
+@keyframes kfError {
     from {
         background: white;
     }
     to {
         background: red;
     }
-  }
-  .animError {
+}
+.animError {
     animation: kfError 0.1s alternate 5;
-  }
+}
 
-  @keyframes kfSwipeRight {
+@keyframes kfSwipeRight {
     0% {
         transform: translateX(0%);
         opacity: 1;
@@ -390,11 +388,11 @@ body::-webkit-scrollbar {
         transform: translateX(-50%);
         opacity: 0;
     }
-  }
-  .animSwipeRight {
+}
+.animSwipeRight {
     animation: kfSwipeRight 0.3s;
-  }
-  @keyframes kfSwipeLeft {
+}
+@keyframes kfSwipeLeft {
     0% {
         transform: translateX(0%);
         opacity: 1;
@@ -407,32 +405,56 @@ body::-webkit-scrollbar {
         transform: translateX(50%);
         opacity: 0;
     }
-  }
-  .animSwipeLeft {
+}
+.animSwipeLeft {
     animation: kfSwipeLeft 0.3s;
-  }
-  .banner {
+}
+.banner {
     display: none;
-    font-size: 3vmax;
+    font-size: 2.0vmax;
     width: 100%;
     height: 10%;
     margin: 0.5vmax;
     color: #666666;
     font-weight: 600;
-  }
-  .banner-btn {
-      display: flex;
-      flex-direction: row;
-  }
-  .banner-btn-group {
+    padding-right: 1vmax;
+
+}
+.banner-install {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    justify-content: center;
+
+}
+.banner-btn {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+}
+.banner-btn-group {
     display: flex;
     flex: 1;
     flex-direction: column;
     justify-content: center;
     margin-left: 3vmax;
-  }
-  .banner-img {
+    align-self: center;
+}
+.banner-img {
     width: 9vmax;
     object-fit: contain;
     margin-left: 3vmax;
-  }
+}
+.close-x {
+    stroke: red;
+    opacity: 0.7;
+    fill: transparent;
+    stroke-linecap: round;
+    stroke-width: 5;
+}
+.banner-close {
+      align-self: center;
+      width: 3vmax;
+      height: 3vmax;
+      padding: 1vmax;
+}

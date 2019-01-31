@@ -32,8 +32,12 @@
 						deferredPrompt = null;
 					});
 				});
+				document.querySelector('#banner-close').addEventListener('click', event => {
+					document.querySelector('#banner').style.display = 'none';
+					event.preventDefault();
+				});
 				// Update UI notify the user they can add to home screen
-				document.querySelector('#installBanner').style.display = 'flex';
+				document.querySelector('#banner').style.display = 'flex';
 			});
 		</script>
 		<script src="vue.js"></script>
@@ -70,11 +74,18 @@
 		</style>
 	</head>
 	<body>
-		<section id="installBanner" class="banner">
-			<img class="banner-img" src="android-chrome-192x192.png"/>
-			<div class="banner-btn-group">
-					<div id="installBtn" class="banner-btn">Install application</div>
-					<div id="installBtn" class="banner-btn">Add the&nbsp<font color="#449def">Easy Darts</font>&nbspapplication to your home screen.</div>
+		<section id="banner" class="banner">
+			<div id="installBanner" class="banner-install">
+				<img class="banner-img" src="android-chrome-192x192.png"/>
+				<div class="banner-btn-group">
+					<div id="installBtn" class="banner-btn">{{language.bannerInstall}}</div>
+					<div id="installBtn" class="banner-btn">{{language.bannerDescription}}</div>
+				</div>
+			</div>
+			<div id="banner-close" class="banner-close">
+				<svg viewbox="0 0 40 40">
+					<path class="close-x" d="M 10,10 L 30,30 M 30,10 L 10,30" />
+				</svg>
 			</div>
 		</section>
 		<div id="app" class="app">
@@ -244,6 +255,8 @@
 		</div>
 		<script defer>
 			var keyboardKeys;
+			var banner;
+
 			function validateThrow(value, left) {
 				if(value < 0 || value > 180)
 					return false;
@@ -687,7 +700,7 @@
 						if(i >= k.length)
 							i = 0;
 						settings.language = this.languageName = k[i];
-						this.language = languages[this.languageName];
+						banner.language = this.language = languages[this.languageName];
 						settings.store();
 						game.updateAll();
 					},
@@ -815,6 +828,17 @@
 					}
 				}
 			});
+			banner = new Vue({
+					el: "#installBanner",
+					data: {
+						language: languages[settings.language]
+					},
+					methods: {
+						close: function() {
+
+						}
+					}
+				});
 			/*var swipeBlock = document.getElementById("scoring");
 			swipe(swipeBlock, { maxTime: 1000, minTime: 100, maxDist: 150,  minDist: 60 });
 			swipeBlock.addEventListener("swipe", function() {

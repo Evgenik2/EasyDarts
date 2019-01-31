@@ -1,7 +1,8 @@
+var cacheName = 'easyDarts-cache';
 self.addEventListener('install', e => {
     self.skipWaiting(); 
     e.waitUntil(
-        caches.open('easyDarts-cache').then(cache => {
+        caches.open(cacheName).then(cache => {
             var root = "/EasyDarts/";
             return cache.addAll([
               root + '',
@@ -35,9 +36,20 @@ self.addEventListener('install', e => {
 
 self.addEventListener('fetch', function(event) {
   console.log(event.request.url);
-  event.respondWith(
-    caches.match(event.request).then(function(response) {
-      return response || fetch(event.request);
-    })
-  );
+  event.respondWith(fromCache(event.request));
+  event.waitUntil(update(event.request));
 });
+function fromCache(request) {
+  return caches.open(cacheName).then(function (cache) {
+    return cache.match(request).then(function (matching) {
+      return matching || Promise.reject('no-match');
+    });
+  });
+}
+function update(request) {
+  return caches.open(cacheName).then(function (cache) {
+    return fetch(request).then(function (response) {
+      return cache.put(request, response);
+    });
+  });
+}
