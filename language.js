@@ -19,7 +19,7 @@ var languages = {
         sets: "Sets",
         legs: "Legs",
         bannerInstall: "Istall Application",
-        bannerDescription: "Add the Easy Darts application to your home screen."
+        bannerDescription: "Add the Easy Darts application to your home screen"
     },
     "ru": {
         language: "Русский",
