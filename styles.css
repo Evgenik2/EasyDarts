@@ -412,8 +412,27 @@ body::-webkit-scrollbar {
     animation: kfSwipeLeft 0.3s;
   }
   .banner {
-    align-content: center;
     display: none;
-    justify-content: center;
+    font-size: 3vmax;
     width: 100%;
+    height: 10%;
+    margin: 0.5vmax;
+    color: #666666;
+    font-weight: 600;
+  }
+  .banner-btn {
+      display: flex;
+      flex-direction: row;
+  }
+  .banner-btn-group {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 3vmax;
+  }
+  .banner-img {
+    width: 9vmax;
+    object-fit: contain;
+    margin-left: 3vmax;
   }
