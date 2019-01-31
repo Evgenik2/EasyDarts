@@ -42,7 +42,7 @@ self.addEventListener('fetch', function(event) {
 function fromCache(request) {
   return caches.open(cacheName).then(function (cache) {
     return cache.match(request).then(function (matching) {
-      return matching || Promise.reject('no-match');
+      return matching || fetch(event.request);
     });
   });
 }
