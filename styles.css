@@ -33,6 +33,11 @@ body::-webkit-scrollbar {
     flex: 6;
     flex-direction: row;
     align-self: stretch;
+    overflow-y:auto;
+    flex-basis: 0;
+}
+#keyboard-keys::-webkit-scrollbar {
+    display: none;
 }
 .keyboard-numbers {
     display: flex;
