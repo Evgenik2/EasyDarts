@@ -77,10 +77,10 @@
 	<body>
 		<section id="banner" class="banner">
 			<div id="installBanner" class="banner-install">
-				<img class="banner-img" src="android-chrome-192x192.png"/>
+				<img class="banner-img" src="android-chrome-192x192.png" alt="Install application banner"/>
 				<div class="banner-btn-group">
-					<div id="installBtn" class="banner-btn">{{language.bannerInstall}}</div>
-					<div id="installBtn" class="banner-btn">{{language.bannerDescription}}</div>
+					<div class="banner-btn">{{language.bannerInstall}}</div>
+					<div class="banner-btn">{{language.bannerDescription}}</div>
 				</div>
 			</div>
 			<div id="banner-close" class="banner-close">
@@ -124,11 +124,11 @@
 								<div class="menu-inc-key" v-on:click="changeLanguage()">{{language.language}}</div>
 							</div>
 							<div class="menu-row">
-								<div class="menu-text"><div class="menu-text-span">{{language.menuFirstPlayer}}</div></div>
+								<div class="menu-text"><label for="player1" class="menu-text-span">{{language.menuFirstPlayer}}</label></div>
 								<input class="menu-input" maxlength="20" v-model="game.player1" id="player1" name="player1"/>
 							</div>
 							<div class="menu-row">
-								<div class="menu-text"><div class="menu-text-span"></div>{{language.menuSecondPlayer}}</span></div>
+								<div class="menu-text"><label for="player1" class="menu-text-span">{{language.menuSecondPlayer}}</label></div>
 								<input class="menu-input" maxlength="20" v-model="game.player2" id="player1" name="player1"/>
 							</div>
 							<div class="menu-row menu-entering-collapsed">
